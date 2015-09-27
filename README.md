@@ -16,7 +16,7 @@ On your CI box login with the created user and execute:
 export PASSWORD="osx_user_password"
 export APPLE_USERNAME="apple.developer@mail.com"
 export APPLE_PASSWORD="secret"
-curl -o mobile-ci-bootstrap.sh https://raw.githubusercontent.com/xfreebird/mobile-ci-bootstrap/master/mobile-ci-bootstrap.sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xfreebird/mobile-ci-bootstrap/master/mobile-ci-bootstrap.sh)"
 
 ```
 
