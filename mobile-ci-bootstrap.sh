@@ -162,8 +162,8 @@ brew install xctool
 showActionMessage "Installing iosbuilder.sh"
 brew install iosbuilder
 
-showActionMessage "Installing Buck"
-brew install --HEAD buck
+# showActionMessage "Installing Buck"
+# brew install --HEAD buck
 
 showActionMessage "Revoking passwordless sudo for '$USERNAME'"
 sudo -S bash -c "cp /etc/sudoers.orig /etc/sudoers"

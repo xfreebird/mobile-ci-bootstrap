@@ -78,7 +78,6 @@ OS X optimised to run headless CI with various useful installed tools.
 * [Build machine info page service](https://github.com/xfreebird/osx-build-machine-info-service)
 * [Provisioning Profiles Management utility](https://github.com/xfreebird/refresh-ios-profiles)
 * [Bamboo Agent Installer helper](https://github.com/xfreebird/bamboo-agent-utility)
-* [Buck](https://github.com/facebook/buck)
 
 
 # Build machine management
