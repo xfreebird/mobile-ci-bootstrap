@@ -12,7 +12,7 @@ Automatically downloads, installs and configures all needed software for a headl
 
 On your CI box login with the created user and execute:
 
-```
+```shell
 export PASSWORD="osx_user_password"
 export APPLE_USERNAME="apple.developer@mail.com"
 export APPLE_PASSWORD="secret"
