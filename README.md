@@ -3,7 +3,7 @@ Automatically downloads, installs and configures all needed software for a headl
 
 # Requirements
 
-* A fresh installed OS X 10.10+
+* A fresh installed OS X 10.10+ 
 * User with admin rights
 * Apple developer account (for Xcode)
 * Internet connection
@@ -21,7 +21,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xfreebird/mobile-ci-boot
 
 At the end you will have:
 
-* complete **Android** and **iOS** build machine
+* complete **Android** and **iOS** 📱 build machine
 * **SSH key pair** ```sshd_rsa_key``` and ```sshd_rsa_key.pub``` for the **build machine** *public key* and **CI agents** *private key*
 * [User UI session SSH daemon](https://github.com/xfreebird/customsshd) running at port **50111** to connect the **CI agents** to the **build machine** using the *private key* and *username*
 * [Build machine info page](https://github.com/xfreebird/osx-build-machine-info-service) at [http://localhost](http://localhost)
@@ -52,7 +52,7 @@ OS X optimised to run headless CI with various useful installed tools.
 * [nomad-cli](http://nomad-cli.com) bundle ***[ios](https://github.com/nomad/Cupertino) [apn](https://github.com/nomad/Houston) [pk](https://github.com/nomad/Dubai) [iap](https://github.com/nomad/Venice) [ipa](https://github.com/nomad/Shenzhen)***
 * [cocoapods](http://cocoapods.org)
 * [carthage](https://github.com/Carthage/Carthage)
-* Code quality tools ***[oclint](http://oclint.org) [lcov](http://ltp.sourceforge.net/coverage/lcov.php) [gcovr](http://gcovr.com) [slather](https://github.com/venmo/slather)***
+* Code quality tools ***[oclint](http://oclint.org) [lcov](http://ltp.sourceforge.net/coverage/lcov.php) [gcovr](http://gcovr.com) [slather](https://github.com/venmo/slather) [cloc](http://cloc.sourceforge.net)***
 * Simulator utility ***[ios-sim](https://github.com/phonegap/ios-sim)***
 * Other utilities ***[splunk-mobile-upload](https://github.com/xfreebird/splunk-mobile-upload) [nexus-upload](https://github.com/xfreebird/nexus-upload) [crashlytics-upload-ipa](https://github.com/xfreebird/crashlytics-upload-ipa) [iosbuilder](https://github.com/xfreebird/iosbuilder) [ocunit2junit]()  [xcpretty]() [slather]()***
 
@@ -78,23 +78,94 @@ OS X optimised to run headless CI with various useful installed tools.
 * [Build machine info page service](https://github.com/xfreebird/osx-build-machine-info-service)
 * [Provisioning Profiles Management utility](https://github.com/xfreebird/refresh-ios-profiles)
 * [Bamboo Agent Installer helper](https://github.com/xfreebird/bamboo-agent-utility)
+* [Buck](https://github.com/facebook/buck)
 
 
 # Build machine management
 
-## Android SDK  
+View all information about installed packages, certificates and profiles from the build machine by browsing the build machine IP or name in browser [http://build-machine-name](http://build-machine-name)
+
+## Android SDK
+
+Install all updates:
+
+```shell
+( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui --all
+```
 
 ## iOS provsioning profiles
 
+Update all provisioning profiles:
+
+```shell
+export APPLE_USERNAME="myapple@gmail.com"
+export APPLE_PASSWORD="supersecret"
+refresh-ios-profiles "Team name1, Team name 2, Other team name"
+```
+
+⚠️ Warning: This command will fail if there are no profiles in the account (Developer or Distribution)
+
+✅ You could create a Jenkins job that runs this script on the slave (build machine) on demand or regularly 
+
 ## iOS signing Certificates
+
+Use ```iosbuilder.keychain``` to install certificates. It has a blank password (e.g. no passowrd). You don't have to expose the system's user password in order to unlock the keychain on the build machine. 
+
+Install additional singing certificate:
+
+```shell
+security unlock-keychain -p '' ~/Library/Keychains/iosbuilder.keychain
+security import /path/to/Certificate.p12 -k ~/Library/Keychains/iosbuilder.keychain -P '' -A
+```
+
+✅ You could create a Jenkins job that runs this script on the slave (build machine) on demand to install the certificate. 
 
 ## Xcode 
 
+All installed Xcodes are following the ```Xcode-<version>.app``` naming convention. 
+The ```/Applications/Xcode.app``` is a symbolic link to the current default Xcode.
+
+To install a new version of Xcode use ```xcode-install```:
+
+```shell
+xcode-install install 7.1
+sudo xcodebuild -license accept
+```
+
 ## Brew packages
+
+Update all packages:
+
+```shell
+brew update
+brew upgrade
+```
+
+⚠️ Warning: If ```android-sdk``` was updated also run the steps from the ```Android SDK```.
 
 ## Gem packages
 
+Update all packages:
+
+```shell
+sudo gem update
+```
+
 ## Npm packages
 
+Update all packages:
+
+```shell
+npm update -g
+```
+
+
 ## PHP packages
+
+Update all packages:
+
+```shell
+sudo easy_install <package_name>
+```
+
 

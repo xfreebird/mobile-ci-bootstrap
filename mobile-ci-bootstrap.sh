@@ -145,6 +145,7 @@ sudo xcodebuild -license accept
 showActionMessage "Installing Appium"
 npm install -g appium
 npm install -g wd
+npm install -g npm-check-updates
 
 showActionMessage "Installing Cordova"
 npm install -g cordova
