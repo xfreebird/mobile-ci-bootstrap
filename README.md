@@ -19,6 +19,16 @@ export APPLE_PASSWORD="secret"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xfreebird/mobile-ci-bootstrap/master/mobile-ci-bootstrap.sh)"
 ```
 
+At the end you will have:
+
+* complete **Android** and **iOS** build machine
+* **SSH key pair** ```sshd_rsa_key``` and ```sshd_rsa_key.pub``` for the **build machine** *public key* and **CI agents** *private key*
+* [User UI session SSH daemon](https://github.com/xfreebird/customsshd) running at port **50111** to connect the **CI agents** to the **build machine** using the *private key* and *username*
+* [Build machine info page](https://github.com/xfreebird/osx-build-machine-info-service) at [http://localhost](http://localhost)
+
+If you want to use your own generated SSH key pair, before running the command place the ```sshd_rsa_key.pub``` file in the same folder were you are going to execute the command.
+ 
+
 # Why ?
 
 **To save time, since it doesn't require any user interaction.**
@@ -67,3 +77,23 @@ OS X optimised to run headless CI with various useful installed tools.
 * [Build machine info page service](https://github.com/xfreebird/osx-build-machine-info-service)
 * [Provisioning Profiles Management utility](https://github.com/xfreebird/refresh-ios-profiles)
 * [Bamboo Agent Installer helper](https://github.com/xfreebird/bamboo-agent-utility)
+
+
+# Build machine management
+
+## Android SDK  
+
+## iOS provsioning profiles
+
+## iOS signing Certificates
+
+## Xcode 
+
+## Brew packages
+
+## Gem packages
+
+## Npm packages
+
+## PHP packages
+
