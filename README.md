@@ -1,5 +1,5 @@
 # mobile-ci-bootstrap
-Downloads, installs and configures all needed software for a headless mobile CI box on OS X
+Automatically downloads, installs and configures all needed software for a headless mobile CI box on OS X 
 
 # Requirements
 
@@ -17,8 +17,11 @@ export PASSWORD="osx_user_password"
 export APPLE_USERNAME="apple.developer@mail.com"
 export APPLE_PASSWORD="secret"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xfreebird/mobile-ci-bootstrap/master/mobile-ci-bootstrap.sh)"
-
 ```
+
+# Why ?
+
+**To save time, since it doesn't require any user interaction.**
 
 # What do you get ?
 
@@ -32,7 +35,7 @@ OS X optimised to run headless CI with various useful installed tools.
 * [findbugs](http://findbugs.sourceforge.net)
 
 ## iOS
-* Latest Xcode
+* Latest [Xcode](https://developer.apple.com/xcode/download/)
 * [xctool](https://github.com/facebook/xctool)
 * [fastlane](https://github.com/KrauseFx/fastlane) bundle ***[fastlane]() [deliver](https://github.com/KrauseFx/deliver) [snapshot](https://github.com/KrauseFx/snapshot) [frameit](https://github.com/fastlane/frameit) [pem](https://github.com/fastlane/PEM) [sigh](https://github.com/KrauseFx/sigh) [produce](https://github.com/fastlane/produce) [cert](https://github.com/fastlane/cert) [codes](https://github.com/fastlane/codes) [spaceship](https://github.com/fastlane/spaceship) [pilot](https://github.com/fastlane/pilot) [gym](https://github.com/fastlane/gym)***
 * [nomad-cli](http://nomad-cli.com) bundle ***[ios](https://github.com/nomad/Cupertino) [apn](https://github.com/nomad/Houston) [pk](https://github.com/nomad/Dubai) [iap](https://github.com/nomad/Venice) [ipa](https://github.com/nomad/Shenzhen)***
