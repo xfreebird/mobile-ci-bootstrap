@@ -162,14 +162,22 @@ brew install xctool
 showActionMessage "Installing iosbuilder.sh"
 brew install iosbuilder
 
-# showActionMessage "Installing Buck"
-# brew install --HEAD buck
+showActionMessage "Installing swiftlint"
+brew install swiftlint
 
 showActionMessage "Revoking passwordless sudo for '$USERNAME'"
 sudo -S bash -c "cp /etc/sudoers.orig /etc/sudoers"
 
 showActionMessage "Installing additional Android SDK components"
-( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui --filter "add-on, extra, platform, platform-tool, system-image, tool"
+packages="1"
+for package in $(android list sdk --all | grep -v Obsolete | grep -v Sources | grep -v "Intel x86 Emulator" | grep -v Samples | grep -v Documentation | grep -v MIPS | grep -v "Android TV" | grep -v "Glass" | grep -v "XML" | grep -v "URL" | grep -v "Packages available" | grep -v "Fetch" | grep -v "Web Driver" | cut -d'-' -f1)
+do
+	 if [ $package != "1" ]; then
+   	packages=$(printf "${packages},${package}")
+   fi
+done
+( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --all --no-ui --filter "$packages"
+( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --all --no-ui --filter platform-tools
 
 showMessage "🔧 Install iOS signing certificates to 🔐 iosbuilder.keychain"
 showMessage "🔧 Install iOS provisioning profiles using the refresh-ios-profiles command."
