@@ -179,14 +179,16 @@ sudo xcodebuild -license accept
 #==== Install Brew packages
 #==========================================================
 showActionMessage "Installing brew packages"
+brew cask install oclint java java7
+
 brew install \
 lcov gcovr ios-sim \
-node go carthage xctool swiftlint \
+node go xctool swiftlint \
 android-sdk android-ndk findbugs sonar-runner maven30 ant gradle \
 splunk-mobile-upload nexus-upload bamboo-agent-utility kcpassword \
 iosbuilder machine-info-service refresh-ios-profiles crashlytics-upload-ipa customsshd
 
-brew cask install oclint java java7
+brew install carthage
 
 showActionMessage "Installing npm packages"
 npm install -g appium wd npm-check-updates cordova phonegap

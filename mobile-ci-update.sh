@@ -88,6 +88,7 @@ case "$1" in
 			;;
 	xcode) enablePasswordlessSudo
 				 updateXcode
+				 updateOSX
 				 ;;
 	php) enablePasswordlessSudo
 			 updatePHPPackages
@@ -95,6 +96,7 @@ case "$1" in
 	android) updateAndroidSDK
 			;;
 	brew) updateBrewPackages
+				updateAndroidSDK
 			;;
 	gem) updateRubyPackages
 			;;
