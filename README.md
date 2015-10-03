@@ -67,6 +67,7 @@ OS X optimised to run headless CI with various useful installed tools.
 
 ## Other tools
 * [`brew`](http://brew.sh)
+* [`rbenv`](https://github.com/sstephenson/rbenv)
 * [`customsshd`](https://github.com/xfreebird/customsshd) A custom ssh daemon running in user UI session 
 * [`Sonar runner`](https://github.com/SonarSource/sonar-runner)
 * [`xcode-install`](https://github.com/neonichu/xcode-install)
@@ -173,6 +174,8 @@ The ```/Applications/Xcode.app``` is a symbolic link to the current default Xcod
 To install a new version of Xcode use ```xcode-install```:
 
 ```shell
+export XCODE_INSTALL_USER="apple.developer@gmail.com"
+XCODE_INSTALL_PASSWORD="secret"
 xcode-install install 7.1
 sudo xcodebuild -license accept
 ```
