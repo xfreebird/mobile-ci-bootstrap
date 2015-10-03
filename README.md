@@ -147,7 +147,7 @@ brew upgrade
 Update all packages:
 
 ```shell
-sudo gem update
+gem update -p
 ```
 
 ## Npm packages
@@ -161,7 +161,7 @@ npm update -g
 
 ## PHP packages
 
-Update all packages:
+Update package:
 
 ```shell
 sudo easy_install <package_name>
