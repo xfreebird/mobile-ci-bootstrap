@@ -121,7 +121,16 @@ iosbuilder machine-info-service refresh-ios-profiles crashlytics-upload-ipa cust
 
 cask install oclint java7
 
-showActionMessage "Installing additional Android SDK components"
+showActionMessage "Installing npm packages"
+npm install -g appium wd npm-check-updates cordova phonegap
+
+showActionMessage "Installing PHP packages"
+sudo easy_install jira
+
+showActionMessage "Installing Go packages"
+go get github.com/aktau/github-release
+
+showActionMessage "Installing additional Android SDK components. Except x86 and MIPS Emulators, Documentation, Sources, Obsolete packages, Web Driver, Glass and Android TV"
 packages="1"
 for package in $(android list sdk --all | grep -v Obsolete | grep -v Sources | grep -v "x86" | grep -v Samples | grep -v Documentation | grep -v MIPS | grep -v "Android TV" | grep -v "Glass" | grep -v "XML" | grep -v "URL" | grep -v "Packages available" | grep -v "Fetch" | grep -v "Web Driver" | cut -d'-' -f1)
 do
