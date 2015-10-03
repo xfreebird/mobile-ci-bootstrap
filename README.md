@@ -84,7 +84,68 @@ OS X optimised to run headless CI with various useful installed tools.
 
 View all information about installed packages, certificates and profiles from the build machine by browsing the build machine IP or name in browser [http://build-machine-name](http://build-machine-name)
 
-## Android SDK
+## iOS provsioning profiles
+
+Update all provisioning profiles:
+
+```shell
+export APPLE_USERNAME="myapple@gmail.com"
+export APPLE_PASSWORD="supersecret"
+refresh-ios-profiles "Team name1, Team name 2, Other team name"
+```
+
+⚠️ Warning: This command will fail if there are no profiles in the account (Developer or Distribution)
+
+✅ You could create a Jenkins job that runs this script on the slave (build machine) on demand or regularly 
+
+## iOS signing certificates
+
+Use ```iosbuilder.keychain``` to install certificates. It has a blank password (e.g. no passowrd). You don't have to expose the system's user password in order to unlock the keychain on the build machine. 
+
+Install additional singing certificate:
+
+```shell
+security unlock-keychain -p '' ~/Library/Keychains/iosbuilder.keychain
+security import /path/to/Certificate.p12 -k ~/Library/Keychains/iosbuilder.keychain -P '' -A
+```
+
+✅ You could create a Jenkins job that runs this script on the slave (build machine) on demand to install the certificate. 
+
+## Updating the build machine
+
+To update installed software you can use the ```mobile-ci-update.sh``` utility. By default it will update the ```OSX```, ```Xcode```, ```Android SDK Componets```, ```Ruby packages```, ```Brew packages```, ```NPM packages```, ```PHP packages```.
+
+```shell
+export PASSWORD="osx_user_password"
+export APPLE_USERNAME="apple.developer@mail.com"
+export APPLE_PASSWORD="secret"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xfreebird/mobile-ci-bootstrap/master/mobile-ci-update.sh)"
+```
+
+Or if you need to update specific component:
+
+```bash
+export PASSWORD="osx_user_password"
+export APPLE_USERNAME="apple.developer@mail.com"
+export APPLE_PASSWORD="secret"
+curl -o mobile-ci-update.sh -fsSL https://raw.githubusercontent.com/xfreebird/mobile-ci-bootstrap/master/mobile-ci-update.sh -o mobile-ci-update.sh
+bash mobile-ci-update.sh xcode
+```
+
+Available options are:
+* ```osx``` - Updates the OSX. ⚠️ Requires env variables ```PASSWORD```, ```APPLE_USERNAME```, ```APPLE_PASSWORD```
+* ```xcode``` - Installs the latest Xcode. ⚠️ Requires env variables ```PASSWORD```, ```APPLE_USERNAME```, ```APPLE_PASSWORD```
+* ```android``` - Updates installed Android SDK
+* ```brew``` - Updates installed brew packages
+* ```gem``` - Updates installed Ruby gems
+* ```npm``` - Updates installed npm packages
+* ```php``` - Updates installed php packages. ⚠️ Requires env variables ```PASSWORD```, ```APPLE_USERNAME```, ```APPLE_PASSWORD```
+
+## Upgrading manually
+
+In case you prefer upgrading the software manually.
+
+### Android SDK
 
 Install all updates:
 
@@ -104,35 +165,7 @@ done
 
 ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --filter "$packages"
 ```
-
-## iOS provsioning profiles
-
-Update all provisioning profiles:
-
-```shell
-export APPLE_USERNAME="myapple@gmail.com"
-export APPLE_PASSWORD="supersecret"
-refresh-ios-profiles "Team name1, Team name 2, Other team name"
-```
-
-⚠️ Warning: This command will fail if there are no profiles in the account (Developer or Distribution)
-
-✅ You could create a Jenkins job that runs this script on the slave (build machine) on demand or regularly 
-
-## iOS signing Certificates
-
-Use ```iosbuilder.keychain``` to install certificates. It has a blank password (e.g. no passowrd). You don't have to expose the system's user password in order to unlock the keychain on the build machine. 
-
-Install additional singing certificate:
-
-```shell
-security unlock-keychain -p '' ~/Library/Keychains/iosbuilder.keychain
-security import /path/to/Certificate.p12 -k ~/Library/Keychains/iosbuilder.keychain -P '' -A
-```
-
-✅ You could create a Jenkins job that runs this script on the slave (build machine) on demand to install the certificate. 
-
-## Xcode 
+### Xcode 
 
 All installed Xcodes are following the ```Xcode-<version>.app``` naming convention. 
 The ```/Applications/Xcode.app``` is a symbolic link to the current default Xcode.
@@ -144,7 +177,7 @@ xcode-install install 7.1
 sudo xcodebuild -license accept
 ```
 
-## Brew packages
+### Brew packages
 
 Update all packages:
 
@@ -155,7 +188,7 @@ brew upgrade
 
 ⚠️ Warning: If ```android-sdk``` was updated also run the steps from the ```Android SDK```.
 
-## Gem packages
+### Gem packages
 
 Update all packages:
 
@@ -163,7 +196,7 @@ Update all packages:
 gem update -p
 ```
 
-## Npm packages
+### Npm packages
 
 Update all packages:
 
@@ -172,7 +205,7 @@ npm update -g
 ```
 
 
-## PHP packages
+### PHP packages
 
 Update package:
 
