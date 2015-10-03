@@ -151,6 +151,11 @@ fastlane deliver snapshot frameit pem sigh produce cert codes spaceship pilot gy
 calabash-cucumber calabash-android
 
 #==========================================================
+#==== Reload the shell environment
+#==========================================================
+source ~/.profile
+
+#==========================================================
 #==== Install the latest available Xcode from
 #==== http://developer.apple.com/downloads
 #==== We don't use the AppStore Xcode
