@@ -190,6 +190,7 @@ brew upgrade
 
 ### Gem packages
 
+⚠️ Don't use ```sudo``` when updating Ruby packages, because we are using [`rbenv`](https://github.com/sstephenson/rbenv).
 Update all packages:
 
 ```shell
