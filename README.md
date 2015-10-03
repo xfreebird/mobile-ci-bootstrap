@@ -89,7 +89,20 @@ View all information about installed packages, certificates and profiles from th
 Install all updates:
 
 ```shell
-( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui --all
+packages=""
+for package in $(android list sdk --no-ui | \
+	grep -v -e "Obsolete" -e "Sources" -e  "x86" -e  "Samples" \
+	-e  "Documentation" -e  "MIPS" -e  "Android TV" \
+	-e  "Glass" -e  "XML" -e  "URL" -e  "Packages available" \
+	-e  "Fetch" -e  "Web Driver" | \
+	cut -d'-' -f1)
+do
+	 if [ $package != "1" ]; then
+   	packages=$(printf "${packages},${package}")
+   fi
+done
+
+( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --filter "$packages"
 ```
 
 ## iOS provsioning profiles
