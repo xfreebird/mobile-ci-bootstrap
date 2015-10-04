@@ -52,8 +52,9 @@ OS X optimised to run headless CI with various useful installed tools.
 * [nomad-cli](http://nomad-cli.com) bundle [`ios`](https://github.com/nomad/Cupertino) [`apn`](https://github.com/nomad/Houston) [`pk`](https://github.com/nomad/Dubai) [`iap`](https://github.com/nomad/Venice) [`ipa`](https://github.com/nomad/Shenzhen)
 * Dependency management tools [`Cocoapods`](http://cocoapods.org) and [`Carthage`](https://github.com/Carthage/Carthage)
 * Code quality tools [`oclint`](http://oclint.org) [`lcov`](http://ltp.sourceforge.net/coverage/lcov.php) [`gcovr`](http://gcovr.com) [`slather`](https://github.com/venmo/slather) [`cloc`](http://cloc.sourceforge.net) [`swiftlint`](https://github.com/realm/SwiftLint)
+* XCTest utilities [`ocunit2junit`](https://github.com/ciryon/OCUnit2JUnit)  [`xcpretty`](https://github.com/supermarin/xcpretty) 
 * Simulator utility [`ios-sim`](https://github.com/phonegap/ios-sim)
-* Other utilities [`splunk-mobile-upload`](https://github.com/xfreebird/splunk-mobile-upload) [`nexus-upload`](https://github.com/xfreebird/nexus-upload) [`crashlytics-upload-ipa`](https://github.com/xfreebird/crashlytics-upload-ipa) [`iosbuilder`](https://github.com/xfreebird/iosbuilder) [`ocunit2junit`](https://github.com/ciryon/OCUnit2JUnit)  [`xcpretty`](https://github.com/supermarin/xcpretty) [`slather`](https://github.com/venmo/slather)
+* Other utilities [`splunk-mobile-upload`](https://github.com/xfreebird/splunk-mobile-upload) [`nexus-upload`](https://github.com/xfreebird/nexus-upload) [`crashlytics-upload-ipa`](https://github.com/xfreebird/crashlytics-upload-ipa) [`iosbuilder`](https://github.com/xfreebird/iosbuilder)
 
 ## UI Automation
 
@@ -67,6 +68,7 @@ OS X optimised to run headless CI with various useful installed tools.
 
 ## Other tools
 * [`brew`](http://brew.sh)
+* [`rbenv`](https://github.com/sstephenson/rbenv)
 * [`customsshd`](https://github.com/xfreebird/customsshd) A custom ssh daemon running in user UI session 
 * [`Sonar runner`](https://github.com/SonarSource/sonar-runner)
 * [`xcode-install`](https://github.com/neonichu/xcode-install)
@@ -173,6 +175,8 @@ The ```/Applications/Xcode.app``` is a symbolic link to the current default Xcod
 To install a new version of Xcode use ```xcode-install```:
 
 ```shell
+export XCODE_INSTALL_USER="apple.developer@gmail.com"
+XCODE_INSTALL_PASSWORD="secret"
 xcode-install install 7.1
 sudo xcodebuild -license accept
 ```
@@ -190,6 +194,7 @@ brew upgrade
 
 ### Gem packages
 
+⚠️ Don't use ```sudo``` when updating Ruby packages, because we are using [`rbenv`](https://github.com/sstephenson/rbenv).
 Update all packages:
 
 ```shell
