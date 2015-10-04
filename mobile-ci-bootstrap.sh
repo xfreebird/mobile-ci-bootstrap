@@ -87,6 +87,8 @@ echo 'export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:$ANDROID_HOM
 echo 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.profile
 source ~/.profile
 
+ln -s ~/.profile ~/.bashrc
+
 #==========================================================
 #==== CI folder
 #==== - Create user writeable folder in /opt/ci
