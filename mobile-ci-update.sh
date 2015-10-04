@@ -11,6 +11,8 @@ function disablePasswordlessSudo() {
 }
 
 function enablePasswordlessSudo() {
+	USERNAME=$(whoami)
+
 	[[ "$PASSWORD" == "" ]] && abort "Set PASSWORD env variable with the passowrd of the $USERNAME."
 
 	trap disablePasswordlessSudo SIGHUP SIGINT SIGTERM EXIT
