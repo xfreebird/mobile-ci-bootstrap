@@ -170,16 +170,18 @@ showActionMessage "Installing the latest Xcode:"
 export XCODE_INSTALL_USER="$APPLE_USERNAME"
 export XCODE_INSTALL_PASSWORD="$APPLE_PASSWORD"
 xcode-install update
-xcode_version_install="7"
+xcode_version_install=""
 #get the latest xcode version (non beta)
 for xcode_version in $(xcode-install list | grep -v beta)
 do
 	xcode_version_install=$xcode_version
 done
 
-showActionMessage "Xcode $xcode_version:"
-xcode-install install "$xcode_version_install"
-sudo xcodebuild -license accept
+if [ x"$xcode_version_install" != x"" ]; then
+	showActionMessage "Xcode $xcode_version:"
+	xcode-install install "$xcode_version_install"
+	sudo xcodebuild -license accept
+fi
 
 #==========================================================
 #==== Install Brew packages

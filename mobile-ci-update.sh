@@ -49,7 +49,7 @@ function updateXcode() {
 		xcode_version_install=$xcode_version
 	done
 
-	[ $xcode_version_install == "" ] && return
+	[ x"$xcode_version_install" == x"" ] && return
 
   if [ $(ver $xcode_version_install) -gt $( ver "$xcode_version_installed") ]; then
 		xcode-install install "$xcode_version_install"
@@ -70,9 +70,7 @@ function updateAndroidSDK() {
 		-e  "Fetch" -e  "Web Driver" | \
 		cut -d'-' -f1)
 	do
-		 if [ $package != "1" ]; then
-	   	packages=$(printf "${packages},${package}")
-	   fi
+	  packages=$(printf "${packages},${package}")
 	done
 
 	if [[ $packages != "" ]]; then
