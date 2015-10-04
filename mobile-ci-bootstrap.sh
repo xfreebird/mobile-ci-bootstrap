@@ -74,9 +74,9 @@ showActionMessage "Fixing permission issues for calabash"
 sudo security authorizationdb write system.privilege.taskport allow
 
 showActionMessage "Injecting environment variables"
-echo 'export LC_ALL=en_US.UTF-8' >> ~/.profile
-echo 'export ANDROID_HOME=/usr/local/opt/android/sdk' > ~/.profile
-echo 'export NDK_HOME=/usr/local/opt/android/ndk' >> ~/.profile
+echo 'export LC_ALL=en_US.UTF-8' > ~/.profile
+echo 'export ANDROID_HOME=/usr/local/opt/android-sdk' >> ~/.profile
+echo 'export NDK_HOME=/usr/local/opt/android-ndk' >> ~/.profile
 echo 'export GOPATH=/usr/local/opt/go/libexec' >> ~/.profile
 echo 'export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home' >> ~/.profile
 echo 'export FINDBUGS_HOME=/usr/local/Cellar/findbugs/3.0.1/libexec' >> ~/.profile
