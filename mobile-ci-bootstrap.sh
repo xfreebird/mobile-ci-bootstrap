@@ -87,6 +87,7 @@ echo 'export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:$ANDROID_HOM
 echo 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.profile
 source ~/.profile
 
+# make Jenkins slave load .profile env variables
 ln -s ~/.profile ~/.bashrc
 
 #==========================================================
@@ -127,6 +128,8 @@ brew tap facebook/fb
 brew tap caskroom/cask
 brew tap caskroom/versions
 brew install caskroom/cask/brew-cask
+brew update
+brew upgrade
 
 #==========================================================
 #==== Install Alternative Ruby Environment
