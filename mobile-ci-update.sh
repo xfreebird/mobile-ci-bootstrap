@@ -23,12 +23,24 @@ function updateOSX() {
 	sudo softwareupdate -i -a -v 
 }
 
+function ver() { 
+	printf "%03d%03d%03d%03d" $(echo "$1" | tr '.' ' ') 
+}
+
 function updateXcode() {
 	[[ "$APPLE_USERNAME" == "" ]] && abort "Set APPLE_USERNAME env variable with the email of an Apple Developer Account."
 	[[ "$APPLE_PASSWORD" == "" ]] && abort "Set APPLE_PASSWORD env variable with the passowrd of an Apple Developer Account."
 
 	export XCODE_INSTALL_USER="$APPLE_USERNAME"
 	export XCODE_INSTALL_PASSWORD="$APPLE_PASSWORD"
+
+	xcode_version_installed=""
+	#get the latest xcode version (non beta)
+	for xcode_version in $(xcode-install installed | grep -v beta | cut -f1)
+	do
+		xcode_version_installed=$xcode_version
+	done
+
 	xcode-install update
 	xcode_version_install=""
 	#get the latest xcode version (non beta)
@@ -37,7 +49,9 @@ function updateXcode() {
 		xcode_version_install=$xcode_version
 	done
 
-  if [[ $xcode_version_install != "" ]]; then
+	[ $xcode_version_install == "" ] && return
+
+  if [ $(ver $xcode_version_install) -gt $( ver "$xcode_version_installed") ]; then
 		xcode-install install "$xcode_version_install"
 		sudo xcodebuild -license accept
 	fi
