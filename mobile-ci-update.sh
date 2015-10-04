@@ -30,15 +30,17 @@ function updateXcode() {
 	export XCODE_INSTALL_USER="$APPLE_USERNAME"
 	export XCODE_INSTALL_PASSWORD="$APPLE_PASSWORD"
 	xcode-install update
-	xcode_version_install="7"
+	xcode_version_install=""
 	#get the latest xcode version (non beta)
 	for xcode_version in $(xcode-install list | grep -v beta)
 	do
 		xcode_version_install=$xcode_version
 	done
 
-	xcode-install install "$xcode_version_install"
-	sudo xcodebuild -license accept
+  if [[ $xcode_version_install != "" ]]; then
+		xcode-install install "$xcode_version_install"
+		sudo xcodebuild -license accept
+	fi
 }
 
 function updatePHPPackages() {
@@ -46,6 +48,7 @@ function updatePHPPackages() {
 }
 
 function updateAndroidSDK() {
+	packages=""
 	for package in $(android list sdk --no-ui | \
 		grep -v -e "Obsolete" -e "Sources" -e  "x86" -e  "Samples" \
 		-e  "Documentation" -e  "MIPS" -e  "Android TV" \
@@ -58,7 +61,9 @@ function updateAndroidSDK() {
 	   fi
 	done
 
-	( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui --filter "$packages"
+	if [[ $packages != "" ]]; then
+		( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui --filter "$packages"
+	fi
 }
 
 function updateBrewPackages() {
