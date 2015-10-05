@@ -156,6 +156,11 @@ ocunit2junit nomad-cli cocoapods xcpretty xcode-install slather cloc \
 fastlane deliver snapshot frameit pem sigh produce cert codes spaceship pilot gym \
 calabash-cucumber calabash-android
 
+# temporary fix for cocoapods 
+# https://github.com/CocoaPods/CocoaPods/issues/2908
+gem uninstall psych
+gem install psych -v 2.0.0
+
 #==========================================================
 #==== Reload the shell environment
 #==========================================================
