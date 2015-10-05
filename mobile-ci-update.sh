@@ -85,7 +85,13 @@ function updateBrewPackages() {
 
 function updateRubyPackages() {
 	gem update -p
+	
+	# temporary fix for cocoapods 
+        # https://github.com/CocoaPods/CocoaPods/issues/2908
+        gem uninstall psych
+        gem install psych -v 2.0.0
 }
+
 function updateNPMPackages() {
 	npm update -g
 }
