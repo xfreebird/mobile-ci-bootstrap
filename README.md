@@ -121,7 +121,7 @@ To update installed software you can use the ```mobile-ci-update.sh``` utility. 
 export PASSWORD="osx_user_password"
 export APPLE_USERNAME="apple.developer@mail.com"
 export APPLE_PASSWORD="secret"
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xfreebird/mobile-ci-bootstrap/master/mobile-ci-update.sh)"
+bash <(curl -s https://raw.githubusercontent.com/xfreebird/mobile-ci-bootstrap/master/mobile-ci-update.sh)
 ```
 
 Or if you need to update specific component:
