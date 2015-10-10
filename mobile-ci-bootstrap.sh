@@ -21,7 +21,7 @@ USERNAME=$(whoami)
 [ "$USERNAME" = "root" ] && abort "Run as yourself, not root."
 groups | grep -q admin || abort "Add $USERNAME to the admin group."
 
-[[ "$PASSWORD" == "" ]] && abort "Set PASSWORD env variable with the passowrd of the $USERNAME."
+[[ "$PASSWORD" == "" ]] && abort "Set PASSWORD env variable with the password of the $USERNAME."
 [[ "$APPLE_USERNAME" == "" ]] && abort "Set APPLE_USERNAME env variable with the email of an Apple Developer Account."
 [[ "$APPLE_PASSWORD" == "" ]] && abort "Set APPLE_PASSWORD env variable with the passowrd of an Apple Developer Account."
 
