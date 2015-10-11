@@ -39,46 +39,34 @@ If you want to use your own generated SSH key pair, before running the command p
 OS X optimised to run headless CI with various useful installed tools.
 
 ## Android
-* Latest [`Android SDK`](https://developer.android.com/sdk/index.html) and [`NDK`](https://developer.android.com/ndk/index.html) with build tools, emulators etc.
-* [`Gradle`](http://gradle.org)
-* [`Maven 3.0.x`](https://maven.apache.org)
-* [`Ant`](http://ant.apache.org)
-* [`findbugs`](http://findbugs.sourceforge.net)
+* [`Android SDK`](https://developer.android.com/sdk/index.html) [`Android  NDK`](https://developer.android.com/ndk/index.html)
+* [`Gradle`](http://gradle.org) [`Maven 3.0.x`](https://maven.apache.org) [`Ant`](http://ant.apache.org) [`findbugs`](http://findbugs.sourceforge.net)
 
 ## iOS
-* Latest [Xcode](https://developer.apple.com/xcode/download/)
-* [`xctool`](https://github.com/facebook/xctool)
-* [fastlane](https://github.com/KrauseFx/fastlane) bundle [`fastlane`](https://github.com/KrauseFx/fastlane) [`deliver`](https://github.com/KrauseFx/deliver) [`snapshot`](https://github.com/KrauseFx/snapshot) [`frameit`](https://github.com/fastlane/frameit) [`pem`](https://github.com/fastlane/PEM) [`sigh`](https://github.com/KrauseFx/sigh) [`produce`](https://github.com/fastlane/produce) [`cert`](https://github.com/fastlane/cert) [`codes`](https://github.com/fastlane/codes) [`spaceship`](https://github.com/fastlane/spaceship) [`pilot`](https://github.com/fastlane/pilot) [`gym`](https://github.com/fastlane/gym)
-* [nomad-cli](http://nomad-cli.com) bundle [`ios`](https://github.com/nomad/Cupertino) [`apn`](https://github.com/nomad/Houston) [`pk`](https://github.com/nomad/Dubai) [`iap`](https://github.com/nomad/Venice) [`ipa`](https://github.com/nomad/Shenzhen)
-* Dependency management tools [`Cocoapods`](http://cocoapods.org) and [`Carthage`](https://github.com/Carthage/Carthage)
-* Code quality tools [`oclint`](http://oclint.org) [`lcov`](http://ltp.sourceforge.net/coverage/lcov.php) [`gcovr`](http://gcovr.com) [`slather`](https://github.com/venmo/slather) [`cloc`](http://cloc.sourceforge.net) [`swiftlint`](https://github.com/realm/SwiftLint)
-* XCTest utilities [`ocunit2junit`](https://github.com/ciryon/OCUnit2JUnit)  [`xcpretty`](https://github.com/supermarin/xcpretty) 
-* Simulator utility [`ios-sim`](https://github.com/phonegap/ios-sim)
-* Other utilities [`splunk-mobile-upload`](https://github.com/xfreebird/splunk-mobile-upload) [`nexus-upload`](https://github.com/xfreebird/nexus-upload) [`crashlytics-upload-ipa`](https://github.com/xfreebird/crashlytics-upload-ipa) [`iosbuilder`](https://github.com/xfreebird/iosbuilder)
+* [`Xcode`](https://developer.apple.com/xcode/download/) [`xctool`](https://github.com/facebook/xctool) [`Cocoapods`](http://cocoapods.org) [`Carthage`](https://github.com/Carthage/Carthage)
+* [Fastlane](https://fastlane.tools) bundle: [`fastlane`](https://github.com/KrauseFx/fastlane) [`deliver`](https://github.com/KrauseFx/deliver) [`snapshot`](https://github.com/KrauseFx/snapshot) [`frameit`](https://github.com/fastlane/frameit) [`pem`](https://github.com/fastlane/PEM) [`sigh`](https://github.com/KrauseFx/sigh) [`produce`](https://github.com/fastlane/produce) [`cert`](https://github.com/fastlane/cert) [`codes`](https://github.com/fastlane/codes) [`spaceship`](https://github.com/fastlane/spaceship) [`pilot`](https://github.com/fastlane/pilot) [`gym`](https://github.com/fastlane/gym)
+* [nomad-cli](http://nomad-cli.com) bundle: [`ios`](https://github.com/nomad/Cupertino) [`apn`](https://github.com/nomad/Houston) [`pk`](https://github.com/nomad/Dubai) [`iap`](https://github.com/nomad/Venice) [`ipa`](https://github.com/nomad/Shenzhen)
+* Code quality tools: [`oclint`](http://oclint.org) [`lcov`](http://ltp.sourceforge.net/coverage/lcov.php) [`gcovr`](http://gcovr.com) [`slather`](https://github.com/venmo/slather) [`cloc`](http://cloc.sourceforge.net) [`swiftlint`](https://github.com/realm/SwiftLint)
+* XCTest utilities: [`ocunit2junit`](https://github.com/ciryon/OCUnit2JUnit)  [`xcpretty`](https://github.com/supermarin/xcpretty) 
+* Simulator utility: [`ios-sim`](https://github.com/phonegap/ios-sim)
+* Other utilities: [`splunk-mobile-upload`](https://github.com/xfreebird/splunk-mobile-upload) [`nexus-upload`](https://github.com/xfreebird/nexus-upload) [`crashlytics-upload-ipa`](https://github.com/xfreebird/crashlytics-upload-ipa) [`iosbuilder`](https://github.com/xfreebird/iosbuilder)
 
 ## UI Automation
 
-* [`Appium`](http://appium.io)
-* [`Calabash`](http://calaba.sh)
+* [`Appium`](http://appium.io) [`Calabash`](http://calaba.sh)
 
 ## Web based frameworks
 
-* [`Phonegap`](http://phonegap.com)
-* [`Cordova`](http://cordova.apache.org)
+* [`Phonegap`](http://phonegap.com) [`Cordova`](http://cordova.apache.org)
 
 ## Other tools
-* [`brew`](http://brew.sh)
-* [`rbenv`](https://github.com/sstephenson/rbenv)
-* [`customsshd`](https://github.com/xfreebird/customsshd) A custom ssh daemon running in user UI session 
+* [`brew`](http://brew.sh) [`rbenv`](https://github.com/sstephenson/rbenv) [`Go`](https://golang.org)[`Node.js`](https://nodejs.org/en/) 
+* [`JDK 7`](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)[`JDK 8`](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * [`Sonar runner`](https://github.com/SonarSource/sonar-runner)
-* [`xcode-install`](https://github.com/neonichu/xcode-install)
-* [`Node.js`](https://nodejs.org/en/)
-* [`Go`](https://golang.org)
-* [`JDK 7`](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)
-* [`JDK 8`](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* [`xcode-install`](https://github.com/neonichu/xcode-install) [`customsshd`](https://github.com/xfreebird/customsshd) 
 * [`GitHub Release tool`](github.com/aktau/github-release)
-* [`Build machine info page service`](https://github.com/xfreebird/osx-build-machine-info-service)
-* [`Provisioning Profiles Management utility`](https://github.com/xfreebird/refresh-ios-profiles)
+* [`Build machine info page service`](https://github.com/xfreebird/osx-build-machine-info-service) 
+* [`Provisioning Profiles Management utility`](https://github.com/xfreebird/refresh-ios-profiles) 
 * [`Bamboo Agent Installer helper`](https://github.com/xfreebird/bamboo-agent-utility)
 
 
@@ -115,13 +103,13 @@ security import /path/to/Certificate.p12 -k ~/Library/Keychains/iosbuilder.keych
 
 ## Updating the build machine
 
-To update installed software you can use the ```mobile-ci-update.sh``` utility. By default it will update the ```OSX```, ```Xcode```, ```Android SDK Componets```, ```Ruby packages```, ```Brew packages```, ```NPM packages```, ```PHP packages```.
+To update installed software you can use the ```mobile-ci-update``` utility. By default it will update the ```OSX```, ```Xcode```, ```Android SDK Componets```, ```Ruby packages```, ```Brew packages```, ```NPM packages```, ```PHP packages```.
 
 ```shell
 export PASSWORD="osx_user_password"
 export APPLE_USERNAME="apple.developer@mail.com"
 export APPLE_PASSWORD="secret"
-bash <(curl -s https://raw.githubusercontent.com/xfreebird/mobile-ci-bootstrap/master/mobile-ci-update.sh)
+mobile-ci-update
 ```
 
 Or if you need to update specific component:
@@ -130,8 +118,7 @@ Or if you need to update specific component:
 export PASSWORD="osx_user_password"
 export APPLE_USERNAME="apple.developer@mail.com"
 export APPLE_PASSWORD="secret"
-curl -o mobile-ci-update.sh -fsSL https://raw.githubusercontent.com/xfreebird/mobile-ci-bootstrap/master/mobile-ci-update.sh -o mobile-ci-update.sh
-bash mobile-ci-update.sh xcode
+mobile-ci-update xcode
 ```
 
 Available options are:
@@ -202,6 +189,7 @@ gem update -p
 ```
 
 ⚠️ Temporary [fix for cocoapods](https://github.com/CocoaPods/CocoaPods/issues/2908)
+
 ```shell
 gem uninstall psych
 gem install psych -v 2.0.0
