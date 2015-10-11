@@ -5,15 +5,19 @@
 function showActionMessage() { echo "⏳`tput setaf 12` $1 `tput op`"; }
 
 function showMessage() {
-	showActionMessage "$1"
-	osascript -e "display notification \"$1\" with title \"Installer\""
+  showActionMessage "$1"
+  osascript -e "display notification \"$1\" with title \"Installer\""
 }
 
 function abort() { echo "!!! $@" >&2; exit 1; }
 
 function cleanUp() {
-	showActionMessage "Revoking passwordless sudo for '$USERNAME'"
-	sudo -S bash -c "cp /etc/sudoers.orig /etc/sudoers"
+  showActionMessage "Revoking passwordless sudo for '$USERNAME'"
+  sudo -S bash -c "cp /etc/sudoers.orig /etc/sudoers"
+}
+
+function ver() { 
+  printf "%03d%03d%03d%03d" $(echo "$1" | tr '.' ' ') 
 }
 
 USERNAME=$(whoami)
@@ -176,16 +180,21 @@ export XCODE_INSTALL_USER="$APPLE_USERNAME"
 export XCODE_INSTALL_PASSWORD="$APPLE_PASSWORD"
 xcode-install update
 xcode_version_install=""
+xcode_latest_installed_version=$(xcode-install installed | cut -f1 | tail -n 1)
+
 #get the latest xcode version (non beta)
 for xcode_version in $(xcode-install list | grep -v beta)
 do
-	xcode_version_install=$xcode_version
+  xcode_version_install=$xcode_version
 done
 
 if [ x"$xcode_version_install" != x"" ]; then
-	showActionMessage "Xcode $xcode_version:"
-	xcode-install install "$xcode_version_install"
-	sudo xcodebuild -license accept
+  if [ $(ver "$xcode_version_install") -gt $(ver "$xcode_latest_installed_version") ];
+  then
+    showActionMessage "Xcode $xcode_version:"
+    xcode-install install "$xcode_version_install"
+    sudo xcodebuild -license accept
+  fi
 fi
 
 #==========================================================
@@ -199,7 +208,8 @@ lcov gcovr ios-sim \
 node go xctool swiftlint \
 android-sdk android-ndk findbugs sonar-runner maven30 ant gradle \
 splunk-mobile-upload nexus-upload bamboo-agent-utility kcpassword \
-iosbuilder machine-info-service refresh-ios-profiles crashlytics-upload-ipa customsshd
+iosbuilder machine-info-service refresh-ios-profiles crashlytics-upload-ipa customsshd \
+mobile-ci-update
 
 brew install carthage
 
@@ -219,14 +229,14 @@ showActionMessage "Installing additional Android SDK components. \
 Except x86 and MIPS Emulators, Documentation, Sources, Obsolete packages, Web Driver, Glass and Android TV"
 packages="1"
 for package in $(android list sdk --all | \
-	grep -v -e "Obsolete" -e "Sources" -e  "x86" -e  "Samples" \
-	-e  "Documentation" -e  "MIPS" -e  "Android TV" \
-	-e  "Glass" -e  "XML" -e  "URL" -e  "Packages available" \
-	-e  "Fetch" -e  "Web Driver" | \
-	cut -d'-' -f1)
+  grep -v -e "Obsolete" -e "Sources" -e  "x86" -e  "Samples" \
+  -e  "Documentation" -e  "MIPS" -e  "Android TV" \
+  -e  "Glass" -e  "XML" -e  "URL" -e  "Packages available" \
+  -e  "Fetch" -e  "Web Driver" | \
+  cut -d'-' -f1)
 do
-	 if [ $package != "1" ]; then
-   	packages=$(printf "${packages},${package}")
+   if [ $package != "1" ]; then
+    packages=$(printf "${packages},${package}")
    fi
 done
 
@@ -238,9 +248,9 @@ done
 #==========================================================
 showActionMessage "Installing custom SSHD agent"
 if [ ! -f sshd_rsa_key.pub ]; then
-	showActionMessage "Generating custom SSHD agent SSH key pair."
-	showActionMessage "Make sure that you save these generated keys."
-	ssh-keygen -t rsa -f sshd_rsa_key -P ""
+  showActionMessage "Generating custom SSHD agent SSH key pair."
+  showActionMessage "Make sure that you save these generated keys."
+  ssh-keygen -t rsa -f sshd_rsa_key -P ""
 fi
 customsshd install sshd_rsa_key.pub
 
@@ -250,10 +260,10 @@ info-service-helper install
 showActionMessage "Enabling autologin"
 enable_autologin "$USERNAME" "$PASSWORD"
 
-showMessage "🔧 Install iOS signing certificates to 🔐 iosbuilder.keychain"
-showMessage "🔧 Install iOS provisioning profiles using the refresh-ios-profiles command."
+showMessage " Install iOS signing certificates to  iosbuilder.keychain"
+showMessage " Install iOS provisioning profiles using the refresh-ios-profiles command."
 
 open "http://localhost"
-showMessage "Build machine is ready ! 🔧 Now connect a Jenkins agent to this machine with '$USERNAME' at port 50111 and 🔑 sshd_rsa_key using workspace /opt/ci/jenkins 🚀"
+showMessage "Build machine is ready !  Now connect a Jenkins agent to this machine with '$USERNAME' at port 50111 and  sshd_rsa_key using workspace /opt/ci/jenkins "
 
 
