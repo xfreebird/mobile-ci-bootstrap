@@ -60,7 +60,7 @@ OS X optimised to run headless CI with various useful installed tools.
 * [`Phonegap`](http://phonegap.com) [`Cordova`](http://cordova.apache.org)
 
 ## Other tools
-* [`brew`](http://brew.sh) [`rbenv`](https://github.com/sstephenson/rbenv) [`Go`](https://golang.org)[`Node.js`](https://nodejs.org/en/) 
+* [`brew`](http://brew.sh) [`rbenv`](https://github.com/sstephenson/rbenv) [`Go`](https://golang.org) [`Node.js`](https://nodejs.org/en/) 
 * [`JDK 7`](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)[`JDK 8`](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * [`Sonar runner`](https://github.com/SonarSource/sonar-runner)
 * [`xcode-install`](https://github.com/neonichu/xcode-install) [`customsshd`](https://github.com/xfreebird/customsshd) 
@@ -83,8 +83,6 @@ export APPLE_USERNAME="myapple@gmail.com"
 export APPLE_PASSWORD="supersecret"
 refresh-ios-profiles "Team name1, Team name 2, Other team name"
 ```
-
-⚠️ Warning: This command will fail if there are no profiles in the account (Developer or Distribution)
 
 ✅ You could create a Jenkins job that runs this script on the slave (build machine) on demand or regularly 
 
