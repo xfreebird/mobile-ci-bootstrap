@@ -61,7 +61,7 @@ OS X optimised to run headless CI with various useful installed tools.
 
 ## Other tools
 * [`brew`](http://brew.sh) [`rbenv`](https://github.com/sstephenson/rbenv) [`Go`](https://golang.org) [`Node.js`](https://nodejs.org/en/) 
-* [`JDK 7`](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)[`JDK 8`](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* [`JDK 7`](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html) [`JDK 8`](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * [`Sonar runner`](https://github.com/SonarSource/sonar-runner)
 * [`xcode-install`](https://github.com/neonichu/xcode-install) [`customsshd`](https://github.com/xfreebird/customsshd) 
 * [`GitHub Release tool`](github.com/aktau/github-release)
