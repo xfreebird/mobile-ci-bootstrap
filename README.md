@@ -189,7 +189,7 @@ gem update -p
 ⚠️ Temporary [fix for cocoapods](https://github.com/CocoaPods/CocoaPods/issues/2908)
 
 ```shell
-gem uninstall psych --al
+gem uninstall psych --all
 gem install psych -v 2.0.0
 ```
 
