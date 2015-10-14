@@ -260,10 +260,10 @@ info-service-helper install
 showActionMessage "Enabling autologin"
 enable_autologin "$USERNAME" "$PASSWORD"
 
-showMessage " Install iOS signing certificates to  iosbuilder.keychain"
-showMessage " Install iOS provisioning profiles using the refresh-ios-profiles command."
+showMessage "🔧 Install iOS signing certificates to 🔒 iosbuilder.keychain"
+showMessage "🔧 Install iOS provisioning profiles using the refresh-ios-profiles command."
 
 open "http://localhost"
-showMessage "Build machine is ready !  Now connect a Jenkins agent to this machine with '$USERNAME' at port 50111 and  sshd_rsa_key using workspace /opt/ci/jenkins "
+showMessage "Build machine is ready ! 🔧 Now connect a Jenkins agent to this machine with '$USERNAME' at port 50111 and 🔑 sshd_rsa_key using workspace /opt/ci/jenkins 🚀"
 
 
