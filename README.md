@@ -101,7 +101,7 @@ security import /path/to/Certificate.p12 -k ~/Library/Keychains/iosbuilder.keych
 
 ## Java enviroment
 
-The Jave environment is controlled by ```jenv```.
+The Java environment is controlled by ```jenv```.
 
 To get current java versions:
 ```shell
