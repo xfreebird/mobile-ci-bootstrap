@@ -120,7 +120,7 @@ jenv global 1.8
 
 To change shell session default java version:
 ```shell
-env shell 1.8
+jenv shell 1.8
 ```
 
 ## Updating the build machine
