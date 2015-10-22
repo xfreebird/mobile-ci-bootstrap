@@ -60,7 +60,7 @@ OS X optimised to run headless CI with various useful installed tools.
 * [`Phonegap`](http://phonegap.com) [`Cordova`](http://cordova.apache.org)
 
 ## Other tools
-* [`brew`](http://brew.sh) [`rbenv`](https://github.com/sstephenson/rbenv) [`Go`](https://golang.org) [`Node.js`](https://nodejs.org/en/) 
+* [`brew`](http://brew.sh) [`rbenv`](https://github.com/sstephenson/rbenv) [`jenv`](https://github.com/gcuisinier/jenv) [`Go`](https://golang.org) [`Node.js`](https://nodejs.org/en/) 
 * [`JDK 7`](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html) [`JDK 8`](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * [`Sonar runner`](https://github.com/SonarSource/sonar-runner)
 * [`xcode-install`](https://github.com/neonichu/xcode-install) [`customsshd`](https://github.com/xfreebird/customsshd) 
@@ -99,6 +99,30 @@ security import /path/to/Certificate.p12 -k ~/Library/Keychains/iosbuilder.keych
 
 ✅ You could create a Jenkins job that runs this script on the slave (build machine) on demand to install the certificate. 
 
+## Java enviroment
+
+The Jave environment is controlled by ```jenv```.
+
+To get current java versions:
+```shell
+jenv version
+```
+
+To list installed java versions:
+```shell
+jenv versions
+```
+
+To change default java version:
+```shell
+jenv global 1.8
+```
+
+To change shell session default java version:
+```shell
+env shell 1.8
+```
+
 ## Updating the build machine
 
 To update installed software you can use the ```mobile-ci-update``` utility. By default it will update the ```OSX```, ```Xcode```, ```Android SDK Componets```, ```Ruby packages```, ```Brew packages```, ```NPM packages```, ```PHP packages```.
@@ -125,6 +149,7 @@ Available options are:
 * ```android``` - Updates installed Android SDK
 * ```brew``` - Updates installed brew packages
 * ```gem``` - Updates installed Ruby gems
+* ```cask``` - Updates installed Brew casks (e.g. java, java7, oclint)
 * ```npm``` - Updates installed npm packages
 * ```php``` - Updates installed php packages. ⚠️ Requires env variables ```PASSWORD```, ```APPLE_USERNAME```, ```APPLE_PASSWORD```
 
@@ -176,6 +201,16 @@ brew upgrade
 ```
 
 ⚠️ Warning: If ```android-sdk``` was updated also run the steps from the ```Android SDK```.
+
+### Brew Cask packages
+
+Update all packages:
+
+```shell
+  brew update
+  brew upgrade brew-cask
+  brew cask update
+```
 
 ### Gem packages
 
