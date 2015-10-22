@@ -82,13 +82,14 @@ echo 'export LC_ALL=en_US.UTF-8' > ~/.profile
 echo 'export ANDROID_HOME=/usr/local/opt/android-sdk' >> ~/.profile
 echo 'export NDK_HOME=/usr/local/opt/android-ndk' >> ~/.profile
 echo 'export GOPATH=/usr/local/opt/go/libexec' >> ~/.profile
-echo 'export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home' >> ~/.profile
 echo 'export FINDBUGS_HOME=/usr/local/Cellar/findbugs/3.0.1/libexec' >> ~/.profile
 echo 'export SONAR_RUNNER_HOME=/usr/local/Cellar/sonar-runner/2.4/libexec' >> ~/.profile
 echo 'export M2_HOME=/usr/local/Cellar/maven30/3.0.5/libexec' >> ~/.profile
 echo 'export M2=/usr/local/Cellar/maven30/3.0.5/libexec/bin' >> ~/.profile
 echo 'export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:$ANDROID_HOME/bin:$PATH:$GOPATH:$GOPATH/bin' >> ~/.profile
+echo 'export JENV_ROOT=/usr/local/var/jenv' >> ~/.profile
 echo 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.profile
+echo 'if which jenv > /dev/null; then eval "$(jenv init -)"; fi' >> ~/.profile
 source ~/.profile
 
 # make Jenkins slave load .profile env variables
@@ -119,6 +120,11 @@ sudo touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
 PROD=$(softwareupdate -l | grep "\*.*Command Line" | head -n 1 | awk -F"*" '{print $2}' | sed -e 's/^ *//' | tr -d '\n')
 sudo softwareupdate -i "$PROD" -v
 sudo rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+
+#==========================================================
+#==== Upgrade system Ruby
+#==========================================================
+( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | sudo gem update -p
 
 #==========================================================
 #==== Install Brew and taps
@@ -202,6 +208,20 @@ fi
 #==========================================================
 showActionMessage "Installing brew packages"
 brew cask install oclint java java7
+
+#==========================================================
+#==== Install Alternative Java Environment
+#==== User writeable, no need for sudo
+#==========================================================
+showActionMessage "Installing jenv"
+brew jenv
+eval "$(jenv init -)"
+for java_home in $(/usr/libexec/java_home -V 2>&1 | uniq | grep -v Matching | grep "Java SE" | cut -f3 | sort)
+do
+( sleep 1 && while [ 1 ]; do sleep 1; echo y; done ) | jenv add "$java_home"
+done
+
+jenv global 1.7
 
 brew install \
 lcov gcovr ios-sim \
