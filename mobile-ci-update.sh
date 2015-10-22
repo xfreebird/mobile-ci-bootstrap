@@ -98,7 +98,8 @@ function updateNPMPackages() {
 
 function updateCasks() {
   brew update
-  brew upgrade cask
+  brew upgrade brew-cask
+  brew cask update
   for file in $(brew cask list) ; do brew cask install $file --force; done
 
   for java_home in $(/usr/libexec/java_home -V 2>&1 | uniq | grep -v Matching | grep "Java SE" | cut -f3 | sort)
