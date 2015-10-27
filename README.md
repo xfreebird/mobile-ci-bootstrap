@@ -1,4 +1,6 @@
 # mobile-ci-bootstrap
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
+
 Automatically downloads, installs and configures all needed software for a headless mobile CI box on OS X 
 
 # Requirements
