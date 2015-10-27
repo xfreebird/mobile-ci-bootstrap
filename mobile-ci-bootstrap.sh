@@ -214,7 +214,7 @@ brew cask install oclint java java7
 #==== User writeable, no need for sudo
 #==========================================================
 showActionMessage "Installing jenv"
-brew jenv
+brew install jenv
 eval "$(jenv init -)"
 for java_home in $(/usr/libexec/java_home -V 2>&1 | uniq | grep -v Matching | grep "Java SE" | cut -f3 | sort)
 do
