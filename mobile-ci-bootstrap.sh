@@ -93,6 +93,7 @@ echo 'if which jenv > /dev/null; then eval "$(jenv init -)"; fi' >> ~/.profile
 source ~/.profile
 
 # make Jenkins slave load .profile env variables
+[[ -f ~/.bashrc ]] && mv ~/.bashrc ~/.bashrc.old
 ln -s ~/.profile ~/.bashrc
 
 #==========================================================
