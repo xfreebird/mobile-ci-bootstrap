@@ -193,7 +193,7 @@ To install a new version of Xcode use ```xcode-install```:
 ```shell
 export XCODE_INSTALL_USER="apple.developer@gmail.com"
 XCODE_INSTALL_PASSWORD="secret"
-xcode-install install 7.1
+xcversion install 7.1
 sudo xcodebuild -license accept
 ```
 
