@@ -185,12 +185,12 @@ source ~/.profile
 showActionMessage "Installing the latest Xcode:"
 export XCODE_INSTALL_USER="$APPLE_USERNAME"
 export XCODE_INSTALL_PASSWORD="$APPLE_PASSWORD"
-xcode-install update
+xcversion update
 xcode_version_install=""
-xcode_latest_installed_version=$(xcode-install installed | cut -f1 | tail -n 1)
+xcode_latest_installed_version=$(xcversion installed | cut -f1 | tail -n 1)
 
 #get the latest xcode version (non beta)
-for xcode_version in $(xcode-install list | grep -v beta)
+for xcode_version in $(xcversion list | grep -v beta)
 do
   xcode_version_install=$xcode_version
 done
@@ -199,7 +199,7 @@ if [ x"$xcode_version_install" != x"" ]; then
   if [ $(ver "$xcode_version_install") -gt $(ver "$xcode_latest_installed_version") ];
   then
     showActionMessage "Xcode $xcode_version:"
-    xcode-install install "$xcode_version_install"
+    xcversion install "$xcode_version_install"
     sudo xcodebuild -license accept
   fi
 fi

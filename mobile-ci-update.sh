@@ -36,15 +36,15 @@ function updateXcode() {
 
   xcode_version_installed=""
   #get the latest xcode version (non beta)
-  for xcode_version in $(xcode-install installed | grep -v beta | cut -f1)
+  for xcode_version in $(xcversion installed | grep -v beta | cut -f1)
   do
     xcode_version_installed=$xcode_version
   done
 
-  xcode-install update
+  xcversion update
   xcode_version_install=""
   #get the latest xcode version (non beta)
-  for xcode_version in $(xcode-install list | grep -v beta)
+  for xcode_version in $(xcversion list | grep -v beta)
   do
     xcode_version_install=$xcode_version
   done
@@ -52,7 +52,7 @@ function updateXcode() {
   [ x"$xcode_version_install" == x"" ] && return
 
   if [ $(ver $xcode_version_install) -gt $(ver "$xcode_version_installed") ]; then
-    xcode-install install "$xcode_version_install"
+    xcversion install "$xcode_version_install"
     sudo xcodebuild -license accept
   fi
 }
