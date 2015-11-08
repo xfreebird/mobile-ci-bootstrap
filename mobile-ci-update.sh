@@ -87,6 +87,7 @@ function updateBrewPackages() {
 }
 
 function updateRubyPackages() {
+  gem cleanup
   gem update -p
   
   # temporary fix for cocoapods 
