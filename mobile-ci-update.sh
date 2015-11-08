@@ -17,6 +17,9 @@ function enablePasswordlessSudo() {
 
   trap disablePasswordlessSudo SIGHUP SIGINT SIGTERM EXIT
   echo "$PASSWORD" | sudo -S bash -c "cp /etc/sudoers /etc/sudoers.orig; echo '${USERNAME} ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers"
+
+  #fix permissions
+  sudo chown -R "$(whoami)" /usr/local
 }
 
 function updateOSX() {
