@@ -235,6 +235,7 @@ mobile-ci-update
 brew install carthage
 
 showActionMessage "Installing npm packages"
+npm install npm@latest -g
 npm install -g appium wd npm-check-updates cordova phonegap
 
 showActionMessage "Installing PHP packages"
