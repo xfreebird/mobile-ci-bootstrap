@@ -83,6 +83,9 @@ defaults -currentHost write com.apple.screensaver idleTime -int 0
 showActionMessage "Disabling Gatekeeper"
 sudo spctl --master-disable
 
+showActionMessage "Automatic Restart on System Freeze"
+sudo systemsetup -setrestartfreeze on
+
 showActionMessage "Fixing permission issues for calabash"
 sudo security authorizationdb write system.privilege.taskport allow
 
