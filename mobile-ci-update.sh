@@ -75,11 +75,22 @@ function updatePHPPackages() {
 
 function updateAndroidSDK() {
   packages=""
-  for package in $(android list sdk -a --no-ui | \
+  for package in $(android list sdk --no-ui | \
     grep -v -e "Obsolete" -e "Sources" -e  "x86" -e  "Samples" \
     -e  "Documentation" -e  "MIPS" -e  "Android TV" \
     -e  "Glass" -e  "XML" -e  "URL" -e  "Packages available" \
-    -e  "Fetch" -e  "Web Driver" -e "GPU Debugging" -e "Android Auto" | \
+    -e  "Fetch" -e  "Web Driver"  -e "GPU Debugging" -e "Android Auto" | \
+    cut -d'-' -f1)
+  do
+    packages=$(printf "${packages},${package}")
+  done
+
+  if [[ $packages != "" ]]; then
+    ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui --filter "$packages"
+  fi
+
+  packages=""
+  for package in $(android list sdk --no-ui -a | grep -v "Obsolete" | grep -e "Build-tools" -e "Platform-tools" | \
     cut -d'-' -f1)
   do
     packages=$(printf "${packages},${package}")
