@@ -30,6 +30,14 @@ function ver() {
   printf "%03d%03d%03d%03d" $(echo "$1" | tr '.' ' ') 
 }
 
+function updateXcodeBuildTools() {
+  # https://github.com/timsutton/osx-vm-templates/blob/master/scripts/xcode-cli-tools.sh
+  touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+  PROD=$(softwareupdate -l | grep "\*.*Command Line" | head -n 1 | awk -F"*" '{print $2}' | sed -e 's/^ *//' | tr -d '\n')
+  softwareupdate -i "$PROD" -v
+  rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+}
+
 function updateXcode() {
   [[ "$APPLE_USERNAME" == "" ]] && abort "Set APPLE_USERNAME env variable with the email of an Apple Developer Account."
   [[ "$APPLE_PASSWORD" == "" ]] && abort "Set APPLE_PASSWORD env variable with the passowrd of an Apple Developer Account."
@@ -57,6 +65,7 @@ function updateXcode() {
   if [ $(ver $xcode_version_install) -gt $(ver "$xcode_version_installed") ]; then
     xcversion install "$xcode_version_install"
     sudo xcodebuild -license accept
+    updateXcodeBuildTools
   fi
 }
 
@@ -66,24 +75,32 @@ function updatePHPPackages() {
 
 function updateAndroidSDK() {
   packages=""
-  for package in $(android list sdk --no-ui | \
+  for package in $(android list sdk -a --no-ui | \
     grep -v -e "Obsolete" -e "Sources" -e  "x86" -e  "Samples" \
     -e  "Documentation" -e  "MIPS" -e  "Android TV" \
     -e  "Glass" -e  "XML" -e  "URL" -e  "Packages available" \
-    -e  "Fetch" -e  "Web Driver" | \
+    -e  "Fetch" -e  "Web Driver" -e "GPU Debugging" -e "Android Auto" | \
     cut -d'-' -f1)
   do
     packages=$(printf "${packages},${package}")
   done
 
   if [[ $packages != "" ]]; then
-    ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui --filter "$packages"
+    ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk -a --no-ui --filter "$packages"
   fi
 }
 
 function updateBrewPackages() {
+
+  current_android_sdk_version=$(brew list --versions | grep android-sdk | rev | cut -d' ' -f 1 | rev)
   brew update
   brew upgrade
+  new_android_sdk_version=$(brew list --versions | grep android-sdk | rev | cut -d' ' -f 1 | rev)
+
+  if [ x"$current_android_sdk_version" != x"$new_android_sdk_version" ]
+  then
+    updateAndroidSDK
+  fi
 }
 
 function updateRubyPackages() {
@@ -139,7 +156,6 @@ case "$1" in
   android) updateAndroidSDK
       ;;
   brew) updateBrewPackages
-        updateAndroidSDK
       ;;
   cask) enablePasswordlessSudo
         updateCasks

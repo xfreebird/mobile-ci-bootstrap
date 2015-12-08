@@ -20,6 +20,15 @@ function ver() {
   printf "%03d%03d%03d%03d" $(echo "$1" | tr '.' ' ') 
 }
 
+function updateXcodeBuildTools() {
+  showActionMessage "Installing Xcode command line tools."
+  # https://github.com/timsutton/osx-vm-templates/blob/master/scripts/xcode-cli-tools.sh
+  touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+  PROD=$(softwareupdate -l | grep "\*.*Command Line" | head -n 1 | awk -F"*" '{print $2}' | sed -e 's/^ *//' | tr -d '\n')
+  softwareupdate -i "$PROD" -v
+  rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+}
+
 USERNAME=$(whoami)
 
 [ "$USERNAME" = "root" ] && abort "Run as yourself, not root."
@@ -115,12 +124,7 @@ sudo softwareupdate -i -a -v
 #==== Install Xcode command line tools
 #==== Required by Brew and Ruby Gems
 #==========================================================
-showActionMessage "Installing Xcode command line tools."
-# https://github.com/timsutton/osx-vm-templates/blob/master/scripts/xcode-cli-tools.sh
-sudo touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-PROD=$(softwareupdate -l | grep "\*.*Command Line" | head -n 1 | awk -F"*" '{print $2}' | sed -e 's/^ *//' | tr -d '\n')
-sudo softwareupdate -i "$PROD" -v
-sudo rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+updateXcodeBuildTools
 
 #==========================================================
 #==== Upgrade system Ruby
@@ -201,6 +205,7 @@ if [ x"$xcode_version_install" != x"" ]; then
     showActionMessage "Xcode $xcode_version:"
     xcversion install "$xcode_version_install"
     sudo xcodebuild -license accept
+    updateXcodeBuildTools
   fi
 fi
 
@@ -254,7 +259,7 @@ for package in $(android list sdk --all | \
   grep -v -e "Obsolete" -e "Sources" -e  "x86" -e  "Samples" \
   -e  "Documentation" -e  "MIPS" -e  "Android TV" \
   -e  "Glass" -e  "XML" -e  "URL" -e  "Packages available" \
-  -e  "Fetch" -e  "Web Driver" | \
+  -e  "Fetch" -e  "Web Driver"  -e "GPU Debugging" -e "Android Auto" | \
   cut -d'-' -f1)
 do
    if [ $package != "1" ]; then
