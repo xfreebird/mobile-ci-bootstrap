@@ -45,24 +45,17 @@ function updateXcode() {
   export XCODE_INSTALL_USER="$APPLE_USERNAME"
   export XCODE_INSTALL_PASSWORD="$APPLE_PASSWORD"
 
-  xcode_version_installed=""
-  #get the latest xcode version (non beta)
-  for xcode_version in $(xcversion installed | grep -v beta | cut -f1)
-  do
-    xcode_version_installed=$xcode_version
-  done
-
   xcversion update
-  xcode_version_install=""
+
   #get the latest xcode version (non beta)
-  for xcode_version in $(xcversion list | grep -v beta)
-  do
-    xcode_version_install=$xcode_version
-  done
+  xcode_latest_installed_version=$(xcversion installed | grep -v beta | tail -n 1 | cut -f1)
+
+  #get the latest xcode version (non beta)
+  xcode_version_install=$(xcversion list | grep -v beta  | tail -n 1 | cut -d" " -f1)
 
   [ x"$xcode_version_install" == x"" ] && return
 
-  if [ $(ver $xcode_version_install) -gt $(ver "$xcode_version_installed") ]; then
+  if [ $(ver $xcode_version_install) -gt $(ver "$xcode_latest_installed_version") ]; then
     xcversion install "$xcode_version_install"
     sudo xcodebuild -license accept
     updateXcodeBuildTools

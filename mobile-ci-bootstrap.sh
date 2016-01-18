@@ -192,15 +192,14 @@ source ~/.profile
 showActionMessage "Installing the latest Xcode:"
 export XCODE_INSTALL_USER="$APPLE_USERNAME"
 export XCODE_INSTALL_PASSWORD="$APPLE_PASSWORD"
+
 xcversion update
-xcode_version_install=""
-xcode_latest_installed_version=$(xcversion installed | cut -f1 | tail -n 1)
 
 #get the latest xcode version (non beta)
-for xcode_version in $(xcversion list | grep -v beta)
-do
-  xcode_version_install=$xcode_version
-done
+xcode_latest_installed_version=$(xcversion installed | grep -v beta | tail -n 1 | cut -f1 | )
+
+#get the latest xcode version (non beta)
+xcode_version_install=$(xcversion list | grep -v beta  | tail -n 1 | cut -d" " -f1)
 
 if [ x"$xcode_version_install" != x"" ]; then
   if [ $(ver "$xcode_version_install") -gt $(ver "$xcode_latest_installed_version") ];
