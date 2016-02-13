@@ -89,6 +89,10 @@ sudo systemsetup -setrestartfreeze on
 showActionMessage "Fixing permission issues for calabash"
 sudo security authorizationdb write system.privilege.taskport allow
 
+showActionMessage "Installing Apple WWDRCA certificate"
+curl -O -L http://developer.apple.com/certificationauthority/AppleWWDRCA.cer
+security import AppleWWDRCA.cer  -k ~/Library/Keychains/login.keychain -P "" -A
+
 showActionMessage "Injecting environment variables"
 echo 'export LC_ALL=en_US.UTF-8' > ~/.profile
 echo 'export ANDROID_HOME=/usr/local/opt/android-sdk' >> ~/.profile
@@ -171,12 +175,12 @@ showActionMessage "Installing rbenv Gems"
 ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | gem update -p
 ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | gem install bundler \
 ocunit2junit nomad-cli cocoapods xcpretty xcode-install slather cloc \
-fastlane deliver snapshot frameit pem sigh produce cert codes spaceship pilot gym \
-calabash-cucumber calabash-android
+fastlane deliver snapshot frameit pem sigh produce cert codes spaceship pilot gym jazzy \
+calabash-cucumber calabash-android 
 
 # temporary fix for cocoapods 
 # https://github.com/CocoaPods/CocoaPods/issues/2908
-gem uninstall psych
+( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | gem uninstall psych
 gem install psych -v 2.0.0
 
 #==========================================================
@@ -237,16 +241,29 @@ node go xctool swiftlint \
 android-sdk android-ndk findbugs sonar-runner maven30 ant gradle \
 splunk-mobile-upload nexus-upload bamboo-agent-utility kcpassword \
 iosbuilder machine-info-service refresh-ios-profiles crashlytics-upload-ipa customsshd \
+graphicsmagick imagemagick \
+ios-webkit-debug-proxy \
 mobile-ci-update
 
 brew install carthage
+brew install buck
+brew install tailor
+
+brew install appledoc
+APPLEDOCVERSION=$(appledoc --version | cut -d' ' -f3)
+
+mkdir ~/Library/Application\ Support/appledoc
+ln -s /usr/local/Cellar/appledoc/${APPLEDOCVERSION}/Templates ~/Library/Application\ Support/appledoc
+ln -s /usr/local/Cellar/appledoc/${APPLEDOCVERSION}/Templates ~/.appledoc
 
 showActionMessage "Installing npm packages"
 npm install npm@latest -g
 npm install -g appium wd npm-check-updates cordova phonegap
 
 showActionMessage "Installing PHP packages"
+sudo easy_install lizard
 sudo easy_install jira
+sudo easy_install pip
 
 showActionMessage "Installing Go packages"
 go get github.com/aktau/github-release

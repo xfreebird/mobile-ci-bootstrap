@@ -63,7 +63,9 @@ function updateXcode() {
 }
 
 function updatePHPPackages() {
-  sudo easy_install jira
+  sudo easy_install --upgrade pip
+  sudo easy_install --upgrade jira
+  sudo easy_install --upgrade lizard
 }
 
 function updateAndroidSDK() {
@@ -97,29 +99,58 @@ function updateAndroidSDK() {
 function updateBrewPackages() {
 
   current_android_sdk_version=$(brew list --versions | grep android-sdk | rev | cut -d' ' -f 1 | rev)
+  curren_sonar_runner_version=$(brew list --versions | grep sonar-runner | rev | cut -d' ' -f 1 | rev)
+  curren_appledoc_version=$(brew list --versions | grep appledoc | rev | cut -d' ' -f 1 | rev)
+
   brew update
   brew upgrade
+
+  # new packages
+  brew install ios-webkit-debug-proxy buck graphicsmagick imagemagick appledoc tailor
+
   new_android_sdk_version=$(brew list --versions | grep android-sdk | rev | cut -d' ' -f 1 | rev)
+  new_sonar_runner_version=$(brew list --versions | grep sonar-runner | rev | cut -d' ' -f 1 | rev)
+  new_appledoc_version=$(brew list --versions | grep appledoc | rev | cut -d' ' -f 1 | rev)
 
   if [ x"$current_android_sdk_version" != x"$new_android_sdk_version" ]
   then
     updateAndroidSDK
   fi
+
+  if [ x"$curren_sonar_runner_version" != x"$new_sonar_runner_version" ]
+  then
+    updateSonarRunnerPath "$curren_sonar_runner_version" "$new_sonar_runner_version"
+  fi
+
+  if [ x"$curren_appledoc_version" != x"$new_appledoc_version" ]
+  then
+    updateAppledocSymLinks
+  fi
 }
 
 function updateRubyPackages() {
-  gem cleanup
-  gem update -p
+  ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | gem cleanup
+  ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | gem update -p
   
+  # new packages
+  ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | gem install jazzy
+
   # temporary fix for cocoapods 
   # https://github.com/CocoaPods/CocoaPods/issues/2908
-  gem uninstall psych --all
+  ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | gem uninstall psych --all
   gem install psych -v 2.0.0
 }
 
 function updateNPMPackages() {
   npm install npm@latest -g
+
+  rm -f /usr/local/bin/npm-check-updates
+  npm install -g npm-check-updates
+
   npm update -g
+  npm uninstall -g phonegap
+  npm install -g phonegap
+  npm outdated -g  | grep -v Package | grep -v phonegap | awk '{print $1}' | xargs -I% npm install -g %@latest --save
 }
 
 function updateCasks() {
@@ -134,6 +165,23 @@ function updateCasks() {
   done
 }
 
+function updateGoPackages() {
+  go get github.com/aktau/github-release
+}
+
+function updateAppledocSymLinks() {
+  APPLEDOCVERSION=$(appledoc --version | cut -d' ' -f3)
+
+  rm -fr ~/.appledoc ~/Library/Application\ Support/appledoc
+  ln -s /usr/local/Cellar/appledoc/${APPLEDOCVERSION}/Templates ~/Library/Application\ Support/appledoc
+  ln -s /usr/local/Cellar/appledoc/${APPLEDOCVERSION}/Templates ~/.appledoc
+}
+
+function updateSonarRunnerPath() {
+  cat ~/.profile  | sed 's|sonar-runner/$1|sonar-runner/$2|g' > ~/.profile.tmp
+  mv ~/.profile.tmp ~/.profile
+}
+
 function updateAll() {
   enablePasswordlessSudo
   updateXcode
@@ -144,6 +192,7 @@ function updateAll() {
   updateAndroidSDK
   updateRubyPackages
   updateNPMPackages
+  updateGoPackages
 }
 
 case "$1" in
@@ -167,6 +216,8 @@ case "$1" in
   gem) updateRubyPackages
       ;;
   npm) updateNPMPackages
+      ;;
+  go) updateNPMPackages
       ;;
   *) updateAll
   ;;
