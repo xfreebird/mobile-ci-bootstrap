@@ -200,7 +200,7 @@ export XCODE_INSTALL_PASSWORD="$APPLE_PASSWORD"
 xcversion update
 
 #get the latest xcode version (non beta)
-xcode_latest_installed_version=$(xcversion installed | grep -v beta | tail -n 1 | cut -f1 | )
+xcode_latest_installed_version=$(xcversion installed | grep -v beta | tail -n 1 | cut -f1)
 
 #get the latest xcode version (non beta)
 xcode_version_install=$(xcversion list | grep -v beta  | tail -n 1 | cut -d" " -f1)
