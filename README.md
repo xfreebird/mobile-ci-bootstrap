@@ -3,10 +3,6 @@
 
 Automatically downloads, installs and configures all needed software for a headless mobile CI box on OS X 
 
-<p align="center">
-  <img align="center" src="https://dl.dropbox.com/s/2pwwf5gnjiqp20o/bootstrap.png" alt="boot">
-</p>
-
 # Requirements
 
 * A fresh installed OS X 10.10+ 
