@@ -1,7 +1,8 @@
 # mobile-ci-bootstrap
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 
-Automatically downloads, installs and configures all needed software for a headless mobile CI box on OS X 
+Automatically downloads, installs and configures all needed software for a headless mobile CI box on OS X.
+
 
 # Requirements
 
@@ -21,115 +22,52 @@ export APPLE_PASSWORD="secret"
 bash <(curl -s https://raw.githubusercontent.com/xfreebird/mobile-ci-bootstrap/master/mobile-ci-bootstrap.sh)
 ```
 
-At the end you will have:
+At the end script execution you will have:
 
-* complete **Android** and **iOS** 📱 build machine
-* **SSH key pair** ```sshd_rsa_key``` and ```sshd_rsa_key.pub``` for the **build machine** *public key* and **CI agents** *private key*
-* [User UI session SSH daemon](https://github.com/xfreebird/customsshd) running at port **50111** to connect the **CI agents** to the **build machine** using the *private key* and *username*
-* [Build machine info page](https://github.com/xfreebird/osx-build-machine-info-service) at [http://localhost](http://localhost)
+* **iOS** and **Android** ready build machine
 * User writeable ```/opt/ci/jenkins``` folder for a [Jenkins agent](https://wiki.jenkins-ci.org/display/JENKINS/Distributed+builds).
-
-If you want to use your own generated SSH key pair, before running the command place the ```sshd_rsa_key.pub``` file in the same folder were you are going to execute the command.
  
 
 # Why ?
 
-**To save time, since it doesn't require any user interaction.**
+To save time, since it doesn't require any user interaction.
 
 # What do you get ?
 
-OS X optimised to run headless CI with various useful installed tools.
-
 ## Android
-* [`Android SDK`](https://developer.android.com/sdk/index.html) [`Android  NDK`](https://developer.android.com/ndk/index.html)
-* [`Gradle`](http://gradle.org) [`Maven 3.0.x`](https://maven.apache.org) [`Ant`](http://ant.apache.org) [`findbugs`](http://findbugs.sourceforge.net)
+* [`Android SDK`](https://developer.android.com/sdk/index.html)
+* [`Android NDK`](https://developer.android.com/ndk/index.html)
 
 ## iOS
-* [`Xcode`](https://developer.apple.com/xcode/download/) [`xctool`](https://github.com/facebook/xctool) [`Cocoapods`](http://cocoapods.org) [`Carthage`](https://github.com/Carthage/Carthage)
-* [Fastlane](https://fastlane.tools) bundle: [`fastlane`](https://github.com/KrauseFx/fastlane) [`deliver`](https://github.com/KrauseFx/deliver) [`snapshot`](https://github.com/KrauseFx/snapshot) [`frameit`](https://github.com/fastlane/frameit) [`pem`](https://github.com/fastlane/PEM) [`sigh`](https://github.com/KrauseFx/sigh) [`produce`](https://github.com/fastlane/produce) [`cert`](https://github.com/fastlane/cert) [`codes`](https://github.com/fastlane/codes) [`spaceship`](https://github.com/fastlane/spaceship) [`pilot`](https://github.com/fastlane/pilot) [`gym`](https://github.com/fastlane/gym)
-* [nomad-cli](http://nomad-cli.com) bundle: [`ios`](https://github.com/nomad/Cupertino) [`apn`](https://github.com/nomad/Houston) [`pk`](https://github.com/nomad/Dubai) [`iap`](https://github.com/nomad/Venice) [`ipa`](https://github.com/nomad/Shenzhen)
-* Code quality tools: [`oclint`](http://oclint.org) [`lcov`](http://ltp.sourceforge.net/coverage/lcov.php) [`gcovr`](http://gcovr.com) [`slather`](https://github.com/venmo/slather) [`cloc`](http://cloc.sourceforge.net) [`swiftlint`](https://github.com/realm/SwiftLint) [`tailor`](https://github.com/sleekbyte/tailor) [`lizard`](https://github.com/terryyin/lizard)
-* XCTest utilities: [`ocunit2junit`](https://github.com/ciryon/OCUnit2JUnit)  [`xcpretty`](https://github.com/supermarin/xcpretty) 
-* Simulator utility: [`ios-sim`](https://github.com/phonegap/ios-sim)
-* Code documentation generators: [`jazzy`](https://github.com/realm/jazzy) [`appledoc`](https://github.com/tomaz/appledoc)
-* Other utilities: [`splunk-mobile-upload`](https://github.com/xfreebird/splunk-mobile-upload) [`nexus-upload`](https://github.com/xfreebird/nexus-upload) [`crashlytics-upload-ipa`](https://github.com/xfreebird/crashlytics-upload-ipa) [`iosbuilder`](https://github.com/xfreebird/iosbuilder)
+* [`Xcode`](https://developer.apple.com/xcode/download/) 
+* [`Carthage`](https://github.com/Carthage/Carthage)
+* Code quality tools: [`oclint`](http://oclint.org) [`swiftlint`](https://github.com/realm/SwiftLint) [`lizard`](https://github.com/terryyin/lizard)
 
-## UI Automation
+## Core
 
-* [`Appium`](http://appium.io) [`Calabash`](http://calaba.sh)
-
-## Web based frameworks
-
-* [`Phonegap`](http://phonegap.com) [`Cordova`](http://cordova.apache.org)
-
-## Other tools
-* [`buck`](https://developer.android.com/sdk/index.html)
-* [`brew`](http://brew.sh) [`rbenv`](https://github.com/sstephenson/rbenv) [`jenv`](https://github.com/gcuisinier/jenv) [`Go`](https://golang.org) [`Node.js`](https://nodejs.org/en/) 
-* [`JDK 7`](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html) [`JDK 8`](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-* [`Sonar runner`](https://github.com/SonarSource/sonar-runner)
-* [`xcode-install`](https://github.com/neonichu/xcode-install) [`customsshd`](https://github.com/xfreebird/customsshd) 
-* [`GitHub Release tool`](github.com/aktau/github-release)
-* [`Build machine info page service`](https://github.com/xfreebird/osx-build-machine-info-service) 
-* [`Provisioning Profiles Management utility`](https://github.com/xfreebird/refresh-ios-profiles) 
-* [`Bamboo Agent Installer helper`](https://github.com/xfreebird/bamboo-agent-utility)
+* [`brew`](http://brew.sh) to install various tools without sudo
+* [`rbenv`](https://github.com/sstephenson/rbenv) to manage ruby versions sudoless 
+* [`bundler`](http://bundler.io) to manage installed ruby gems sudoless
+* [`xcode-install`](https://github.com/KrauseFx/xcode-install) to install various versions of xcode
+* [`jenv`](https://github.com/gcuisinier/jenv) to manage installed java versions
+* [`nvm`](https://github.com/creationix/nvm) to manage node versions sudoless. usefull for cordova, phonegap, ionic, react native
+* [`latest jdk`](http://www.oracle.com/technetwork/java/javase/downloads/)
+* [`latest git`](https://git-scm.com)
 
 
 # Build machine management
 
-View all information about installed packages, certificates and profiles from the build machine by browsing the build machine IP or name in browser [http://build-machine-name](http://build-machine-name)
+## Apple Developer Certificates
 
-## iOS provsioning profiles
+Never install code siging ceritificates in the login keychain. This will halt the codesiging process run by xcodebuild from ssh session. If you have any private key + certificate for app code signing installed in the login keychain, please remove them.
 
-Update all provisioning profiles:
+## Gradle
 
-```shell
-export APPLE_USERNAME="myapple@gmail.com"
-export APPLE_PASSWORD="supersecret"
-refresh-ios-profiles "Team name1, Team name 2, Other team name"
-```
+For CI jobs always use project's [gradle wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html), because different projects use different versions of gradle.
 
-✅ You could create a Jenkins job that runs this script on the slave (build machine) on demand or regularly 
+## Automated update/upgrade
 
-## iOS signing certificates
-
-Use ```iosbuilder.keychain``` to install certificates. It has a blank password (e.g. no passowrd). You don't have to expose the system's user password in order to unlock the keychain on the build machine. 
-
-Install additional singing certificate:
-
-```shell
-security unlock-keychain -p '' ~/Library/Keychains/iosbuilder.keychain
-security import /path/to/Certificate.p12 -k ~/Library/Keychains/iosbuilder.keychain -P '' -A
-```
-
-✅ You could create a Jenkins job that runs this script on the slave (build machine) on demand to install the certificate. 
-
-## Java enviroment
-
-The Java environment is controlled by ```jenv```.
-
-To get current java versions:
-```shell
-jenv version
-```
-
-To list installed java versions:
-```shell
-jenv versions
-```
-
-To change default java version:
-```shell
-jenv global 1.8
-```
-
-To change shell session default java version:
-```shell
-jenv shell 1.8
-```
-
-## Updating the build machine
-
-To update installed software you can use the ```mobile-ci-update``` utility. By default it will update the ```OSX```, ```Xcode```, ```Android SDK Componets```, ```Ruby packages```, ```Brew packages```, ```NPM packages```, ```PHP packages```.
+To update installed software you can use the ```mobile-ci-update``` utility. By default it will update the ```OSX```, ```Xcode```,  ```Brew packages```
 
 ```shell
 export PASSWORD="osx_user_password"
@@ -148,39 +86,20 @@ mobile-ci-update xcode
 ```
 
 Available options are:
-* ```osx``` - Updates the OSX. ⚠️ Requires env variables ```PASSWORD```, ```APPLE_USERNAME```, ```APPLE_PASSWORD```
-* ```xcode``` - Installs the latest Xcode. ⚠️ Requires env variables ```PASSWORD```, ```APPLE_USERNAME```, ```APPLE_PASSWORD```
-* ```android``` - Updates installed Android SDK
-* ```brew``` - Updates installed brew packages
-* ```gem``` - Updates installed Ruby gems
-* ```cask``` - Updates installed Brew casks (e.g. java, java7, oclint)
-* ```npm``` - Updates installed npm packages
-* ```php``` - Updates installed php packages. ⚠️ Requires env variables ```PASSWORD```, ```APPLE_USERNAME```, ```APPLE_PASSWORD```
 
-## Upgrading manually
+* ```osx``` - Updates the OSX. It will not upgrade the OS for major releases (e.g. 10.11 -> 10.12) ⚠️ Requires env variables ```PASSWORD```, ```APPLE_USERNAME```, ```APPLE_PASSWORD```
+* ```xcode``` - Installs the latest Xcode. ⚠️ Requires env variables ```PASSWORD```, ```APPLE_USERNAME```, ```APPLE_PASSWORD```
+* ```brew``` - Updates installed brew packages (e.g. swiftlint, rbenv)
+* ```cask``` - Updates installed Brew casks (e.g. java, oclint)
+
+## Manual update/upgrade management
 
 In case you prefer upgrading the software manually.
 
 ### Android SDK
 
-Install all updates:
+Please use [Google's official documentation](https://developer.android.com/studio/command-line/sdkmanager.html#install_packages) on how to manage the android sdk packages.
 
-```shell
-packages=""
-for package in $(android list sdk --no-ui | \
-	grep -v -e "Obsolete" -e "Sources" -e  "x86" -e  "Samples" \
-	-e  "Documentation" -e  "MIPS" -e  "Android TV" \
-	-e  "Glass" -e  "XML" -e  "URL" -e  "Packages available" \
-	-e  "Fetch" -e  "Web Driver" | \
-	cut -d'-' -f1)
-do
-	 if [ $package != "1" ]; then
-   	packages=$(printf "${packages},${package}")
-   fi
-done
-
-( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --filter "$packages"
-```
 ### Xcode 
 
 All installed Xcodes are following the ```Xcode-<version>.app``` naming convention. 
@@ -191,11 +110,13 @@ To install a new version of Xcode use ```xcode-install```:
 ```shell
 export XCODE_INSTALL_USER="apple.developer@gmail.com"
 XCODE_INSTALL_PASSWORD="secret"
-xcversion install 7.1
+xcversion install 9.3
 sudo xcodebuild -license accept
 ```
 
-### Brew packages
+⚠️ Don't install Xcode from App Store, as it will make harder to switch between Xcode versions.
+
+### Brew and Cask packages
 
 Update all packages:
 
@@ -204,49 +125,64 @@ brew update
 brew upgrade
 ```
 
-⚠️ Warning: If ```android-sdk``` was updated also run the steps from the ```Android SDK```.
+⚠️ Warning: If ```android-sdk``` is updated, please ensure that you have all required packages with the new version.
 
-### Brew Cask packages
-
-Update all packages:
-
-```shell
-  brew update
-  brew upgrade brew-cask
-  brew cask update
-```
 
 ### Gem packages
 
-⚠️ Don't use ```sudo``` when updating Ruby packages, because we are using [`rbenv`](https://github.com/sstephenson/rbenv).
-Update all packages:
+* ⚠️ Use only [`bundler`](http://bundler.io) to manage gem versions.
+* ⚠️ Don't use ```sudo``` when updating/installing gem packages, because ruby is managed by [`rbenv`](https://github.com/sstephenson/rbenv).
+
+Don't rely on gem versions installed on the machine, alwas manage with [`bundler`](http://bundler.io)
+
+
+### Node.js versions and packages
+
+Node versions are managed with [`nvm`](https://github.com/creationix/nvm)
+npm comes with the installed node version.
+
+⚠️ Each CI job should prepare its Node and npm dependencies, they should not rely on versions installed on the build machine.
+
+For example, if the project need node.js 9 and cordova npm package, then it would execute:
 
 ```shell
-gem update -p
-```
-
-⚠️ Temporary [fix for cocoapods](https://github.com/CocoaPods/CocoaPods/issues/2908)
-
-```shell
-gem uninstall psych --all
-gem install psych -v 2.0.0
-```
-
-### Npm packages
-
-Update all packages:
-
-```shell
-npm update -g
+nvm install 9
+npm install -g cordova 
 ```
 
 
 ### PHP packages
 
-Update package:
+PHP packages are managed with [`easy_install`](http://setuptools.readthedocs.io/en/latest/easy_install.html)
+
+To update a package, run:
 
 ```shell
-sudo easy_install <package_name>
+sudo easy_install --upgrade <package_name>
+```
+
+### Java enviroment
+
+The Java environment is controlled by ```jenv```.
+
+To get current java versions:
+```shell
+jenv version
+```
+
+To list installed java versions:
+```shell
+jenv versions
+```
+
+To change default java version:
+```shell
+jenv global 10
+```
+
+To change shell session default java version:
+```shell
+jenv shell 10
 ```
 
 
