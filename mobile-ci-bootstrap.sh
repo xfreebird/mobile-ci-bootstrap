@@ -104,7 +104,6 @@ echo 'export JENV_ROOT=/usr/local/var/jenv' >> ~/.profile
 echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.profile
 echo 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.profile
 echo 'if which jenv > /dev/null; then eval "$(jenv init -)"; fi' >> ~/.profile
-echo '. "/usr/local/opt/nvm/nvm.sh"' >> ~/.profile
 
 mkdir ~/.nvm
 source ~/.profile
@@ -202,9 +201,6 @@ if [ x"$xcode_version_install" != x"" ]; then
   fi
 fi
 
-#==========================================================
-#==== Install Java
-#==========================================================
 showActionMessage "Installing Java"
 brew cask install caskroom/versions/java8
 
@@ -217,6 +213,9 @@ brew install git nvm swiftlint oclint
 
 showActionMessage "Installing carthage"
 brew install carthage
+
+echo '. "/usr/local/opt/nvm/nvm.sh"' >> ~/.profile
+source ~/.profile
 
 showActionMessage "Installing latest version of node.js"
 nvm install node
