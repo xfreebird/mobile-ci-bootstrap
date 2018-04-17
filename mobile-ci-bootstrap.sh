@@ -95,14 +95,16 @@ security import AppleWWDRCA.cer  -k ~/Library/Keychains/login.keychain -P "" -A
 
 showActionMessage "Injecting environment variables"
 echo 'export LC_ALL=en_US.UTF-8' > ~/.profile
-echo 'export ANDROID_HOME=/usr/local/opt/android-sdk' >> ~/.profile
-echo 'export NDK_HOME=/usr/local/opt/android-ndk' >> ~/.profile
+echo 'export ANDROID_SDK_ROOT=/usr/local/share/android-sdk' >> ~/.profile
+echo 'export ANDROID_NDK_HOME=/usr/local/share/android-ndk' >> ~/.profile
+echo 'export ANDROID_HOME=$ANDROID_SDK_ROOT' >> ~/.profile
+echo 'export NDK_HOME=$ANDROID_NDK_HOME' >> ~/.profile
 echo 'export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:$ANDROID_HOME/bin:$PATH' >> ~/.profile
 echo 'export JENV_ROOT=/usr/local/var/jenv' >> ~/.profile
 echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.profile
 echo 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.profile
 echo 'if which jenv > /dev/null; then eval "$(jenv init -)"; fi' >> ~/.profile
-echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.profile
+echo '. "/usr/local/opt/nvm/nvm.sh"' >> ~/.profile
 
 mkdir ~/.nvm
 source ~/.profile
@@ -204,37 +206,25 @@ fi
 #==== Install Java
 #==========================================================
 showActionMessage "Installing Java"
-brew cask install java
+brew cask install caskroom/versions/java8
 
-#==========================================================
-#==== Install Alternative Java Environment
-#==== User writeable, no need for sudo
-#==========================================================
-showActionMessage "Installing jenv"
-brew install jenv
-eval "$(jenv init -)"
-for java_home in $(/usr/libexec/java_home -V 2>&1 | uniq | grep -v Matching | grep "Java SE" | cut -f3 | sort)
-do
-( sleep 1 && while [ 1 ]; do sleep 1; echo y; done ) | jenv add "$java_home"
-done
+showActionMessage "Installing Android SDK and NDK"
+brew cask install android-sdk
+brew cask install android-ndk
 
-brew install git kcpassword mobile-ci-update nvm \
-android-sdk android-ndk \
-swiftlint oclint
-
-showActionMessage "Installing latest version of node.js"
-nvm install node
+brew install kcpassword mobile-ci-update 
+brew install git nvm swiftlint oclint
 
 showActionMessage "Installing carthage"
 brew install carthage
 
-showActionMessage "Enabling autologin"
-enable_autologin "$USERNAME" "$PASSWORD"
+showActionMessage "Installing latest version of node.js"
+nvm install node
 
 showActionMessage "Installing Lizard code static code analysis"
 sudo easy_install lizard
 
+showActionMessage "Enabling autologin"
+enable_autologin "$USERNAME" "$PASSWORD"
 
 showMessage "Build machine is ready ! 🔧 Now connect a Jenkins agent to this machine with '$USERNAME' at port 22 using workspace /opt/ci/jenkins 🚀"
-
-

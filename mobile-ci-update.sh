@@ -71,23 +71,11 @@ function updateRubyPackages() {
   ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | gem update xcode-install --no-rdoc --no-ri
 }
 
-function updateCasks() {
-  brew update
-  for file in $(brew cask list) ; do brew cask reinstall $file --force; done
-
-  for java_home in $(/usr/libexec/java_home -V 2>&1 | uniq | grep -v Matching | grep "Java SE" | cut -f3 | sort)
-  do
-    ( sleep 1 && while [ 1 ]; do sleep 1; echo y; done ) | jenv add "$java_home"
-  done
-}
-
-
 function updateAll() {
   enablePasswordlessSudo
   updateXcode
   updateOSX
   updateBrewPackages
-  updateCasks
   updateRubyPackages
 }
 
@@ -101,9 +89,6 @@ case "$1" in
          updateOSX
          ;;
   brew) updateBrewPackages
-      ;;
-  cask) enablePasswordlessSudo
-        updateCasks
       ;;
   *) updateAll
   ;;

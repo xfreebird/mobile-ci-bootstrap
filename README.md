@@ -1,7 +1,7 @@
 # mobile-ci-bootstrap
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 
-Automatically downloads, installs and configures all needed software for a headless mobile CI box on OS X.
+Automatically downloads, installs and configures min needed software for a headless mobile CI box on OS X.
 
 
 # Requirements
@@ -51,7 +51,7 @@ To save time, since it doesn't require any user interaction.
 * [`xcode-install`](https://github.com/KrauseFx/xcode-install) to install various versions of xcode
 * [`jenv`](https://github.com/gcuisinier/jenv) to manage installed java versions
 * [`nvm`](https://github.com/creationix/nvm) to manage node versions sudoless. usefull for cordova, phonegap, ionic, react native
-* [`latest jdk`](http://www.oracle.com/technetwork/java/javase/downloads/)
+* [`jdk 8`](http://www.oracle.com/technetwork/java/javase/downloads/)
 * [`latest git`](https://git-scm.com)
 
 
@@ -90,7 +90,6 @@ Available options are:
 * ```osx``` - Updates the OSX. It will not upgrade the OS for major releases (e.g. 10.11 -> 10.12) ⚠️ Requires env variables ```PASSWORD```, ```APPLE_USERNAME```, ```APPLE_PASSWORD```
 * ```xcode``` - Installs the latest Xcode. ⚠️ Requires env variables ```PASSWORD```, ```APPLE_USERNAME```, ```APPLE_PASSWORD```
 * ```brew``` - Updates installed brew packages (e.g. swiftlint, rbenv)
-* ```cask``` - Updates installed Brew casks (e.g. java, oclint)
 
 ## Manual update/upgrade management
 
@@ -116,7 +115,7 @@ sudo xcodebuild -license accept
 
 ⚠️ Don't install Xcode from App Store, as it will make harder to switch between Xcode versions.
 
-### Brew and Cask packages
+### Brew packages
 
 Update all packages:
 
@@ -124,9 +123,6 @@ Update all packages:
 brew update
 brew upgrade
 ```
-
-⚠️ Warning: If ```android-sdk``` is updated, please ensure that you have all required packages with the new version.
-
 
 ### Gem packages
 
@@ -163,7 +159,12 @@ sudo easy_install --upgrade <package_name>
 
 ### Java enviroment
 
-The Java environment is controlled by ```jenv```.
+The Java environment can be controlled with ```jenv```.
+
+A new java version:
+```shell
+jenv add '/path/to/java_home'
+```
 
 To get current java versions:
 ```shell
