@@ -220,7 +220,7 @@ done
 
 brew install git kcpassword mobile-ci-update nvm \
 android-sdk android-ndk \
-swiftlint oclint \
+swiftlint oclint
 
 showActionMessage "Installing latest version of node.js"
 nvm install node
