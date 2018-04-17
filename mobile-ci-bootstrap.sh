@@ -138,7 +138,6 @@ updateXcodeBuildTools
 showActionMessage "Installing brew"
 echo "" | ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
-brew tap homebrew/versions
 brew tap caskroom/cask
 brew tap caskroom/versions
 
