@@ -95,9 +95,17 @@ Available options are:
 
 In case you prefer upgrading the software manually.
 
-### Android SDK
+### Android SDK & NDK
 
-Please use [Google's official documentation](https://developer.android.com/studio/command-line/sdkmanager.html#install_packages) on how to manage the android sdk packages.
+Both the SDK and NDK have been installed using the brew cask. To upgrade the SDK or/and NDK version, run:
+
+```shell
+brew update
+brew cask reinstall android-ndk
+brew cask reinstall android-sdk
+```
+
+To manage Android SDK packages, please refer to [Google's official documentation](https://developer.android.com/studio/command-line/sdkmanager.html#install_packages) on how to manage the android sdk packages.
 
 ### Xcode 
 
