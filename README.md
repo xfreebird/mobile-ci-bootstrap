@@ -41,7 +41,7 @@ To save time, since it doesn't require any user interaction.
 ## iOS
 * [`Xcode`](https://developer.apple.com/xcode/download/) 
 * [`Carthage`](https://github.com/Carthage/Carthage)
-* Code quality tools: [`oclint`](http://oclint.org) [`swiftlint`](https://github.com/realm/SwiftLint) [`lizard`](https://github.com/terryyin/lizard)
+* Code quality tools: [`oclint`](http://oclint.org) [`swiftlint`](https://github.com/realm/SwiftLint)
 
 ## Core
 

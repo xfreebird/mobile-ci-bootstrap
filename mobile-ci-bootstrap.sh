@@ -220,8 +220,8 @@ source ~/.profile
 showActionMessage "Installing latest version of node.js"
 nvm install node
 
-showActionMessage "Installing Lizard code static code analysis"
-sudo easy_install lizard
+#showActionMessage "Installing Lizard code static code analysis"
+#sudo easy_install lizard
 
 showActionMessage "Enabling autologin"
 enable_autologin "$USERNAME" "$PASSWORD"
