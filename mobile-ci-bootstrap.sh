@@ -24,7 +24,7 @@ function updateXcodeBuildTools() {
   showActionMessage "Installing Xcode command line tools."
   # https://github.com/timsutton/osx-vm-templates/blob/master/scripts/xcode-cli-tools.sh
   touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-  OSXVERSION=$(defaults read loginwindow SystemVersionStampAsString)
+  OSXVERSION=$(sw_vers -productVersion | cut -d'.' -f1 -f2)
   PROD=$(softwareupdate -l | grep "\*.*Command Line" | grep "$OSXVERSION" | awk -F"*" '{print $2}' | sed -e 's/^ *//' | tr -d '\n')
   softwareupdate -i "$PROD" --verbose
   rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
