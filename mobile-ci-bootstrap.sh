@@ -153,11 +153,12 @@ brew upgrade
 #==== Install Alternative Ruby Environment
 #==== User writeable, no need for sudo
 #==========================================================
-showActionMessage "Installing rbenv 2.3.7"
+RUBY_VERSION="2.4.0"
+showActionMessage "Installing rbenv $RUBY_VERSION"
 brew install rbenv ruby-build
 eval "$(rbenv init -)"
-rbenv install 2.3.7
-rbenv global 2.3.7
+rbenv install $RUBY_VERSION
+rbenv global $RUBY_VERSION
 
 #==========================================================
 #==== Reload the shell environment
